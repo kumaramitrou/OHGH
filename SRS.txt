@@ -1,0 +1,43 @@
+SRS (Software Requirement Specification)
+----------------------------------------
+* A requirements specification in a software system is a complete description of the behavior of a system to be developed.
+* It includes set of use cases that describes all interactions the users will have with the software.
+
+Consist of:
+> functional requirements
+	- describe functionality or system services.
+	- depends on type of software, expected users.
+	
+> Non-functional requirements
+	- these define system properties and constraints
+		e.g. reliablility, response time and storage requirements.
+	- more important than functional.
+	
+SRS Document should have:
+> Introduction
+	- Purpose
+	- Scope
+	- Definition
+	- System Overview
+	- References
+
+> Overall Description
+	- Product perspective
+	- Product Functions
+	- User Characteristics
+	- Constraints, Assumptions and Dependencies.
+	
+> Specific Requirements
+	- External Interfaces
+	- Functions
+	- Performance Requirements
+	- Logical DB Requirements
+	- Design Constraints
+	- Key Features
+	
+> Validation Checks
+	- Validity Check
+	- Consistency Check
+	- Realism Check
+	- Verifiablility Check
+	- Completeness Check

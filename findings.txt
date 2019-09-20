@@ -1,0 +1,5 @@
+References: http://www.ijirst.org/articles/IJIRSTV1I11155.pdf
+			http://www.allprojectreports.com/MBA-Projects/HR-Project-Report/project-report-grievance-handling-system.htm
+			(best for grievance)https://www.bennett.edu.in/wp-content/uploads/2018/08/Greivance-Mech-Emp-and-Students.pdf
+			(sample website)http://mantechpublications.com/admin/index.php/RTiCSaST/login?source=%2Fadmin%2Findex.php%2FRTiCSaST%2Fissue%2FviewFile%2F498%2F525
+			(sample SRS)http://www.cse.iitd.ac.in/~cs5080212/Group08_(STUB)_SRS_Version_1.1.pdf

@@ -1,0 +1,17 @@
+nav li{
+    list-style: none;
+    padding: 0;
+    display: inline;
+}
+
+nav{
+    text-align: center;
+}
+
+.div-left{
+    float: left;
+}
+
+.div-right{
+    float: right;
+}
