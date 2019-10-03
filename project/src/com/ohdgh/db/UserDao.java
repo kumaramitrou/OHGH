@@ -21,8 +21,6 @@ public class UserDao {
 	
 	public boolean checkCredential(String uname, String password)
 	{
-		System.out.println("Inside Check Credentials");
-		System.out.println(uname + " " + password);
 		String query = "select * from [dbo].[User] where [UserName] = ? and [Password] = ?";
 		try {
 			
@@ -43,7 +41,6 @@ public class UserDao {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
-		System.out.println("Leaving UserDao");
 		return false;
 	}
 	
@@ -61,9 +58,34 @@ public class UserDao {
 			ResultSet rs = st.executeQuery();
 			
 			return rs.next();
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return false;
+	}
+	
+	public String userLandingPage(String uname)
+	{
+		String query = "select [HomePage] from [dbo].[User] where [UserName] = ?";
+		String landingPage = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement st = con.prepareStatement(query);
+			
+			st.setString(1, uname);
+			
+			ResultSet rs = st.executeQuery();
+			if(rs.next())
+			{
+				landingPage = rs.getString(1);
+				System.out.println(landingPage);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return landingPage;
 	}
 }

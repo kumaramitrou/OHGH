@@ -4,9 +4,17 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Help Desk.</title>
 </head>
 <body>
-<h1>About Us Page</h1>
+<h1>About Us and Contact Us...</h1>
+<pre>
+	We are student of -college name- studying in -this- branch and of -this- batch.
+</pre>
+Developers of this application are
+<ul>
+	<li>Neha Kumari.</li>
+	<li>-Second Member-.</li>
+</ul>
 </body>
 </html>

@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Contact Us Page.</h1>
+<%
+	response.sendRedirect("Login.jsp");
+%>
 </body>
 </html>

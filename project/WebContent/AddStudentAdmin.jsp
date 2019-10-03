@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,21 +45,27 @@
 				<li class="menuitem"><a href="AboutUs.jsp">About Us</a></li>
 			</ul>
 	    </nav>
-<h1>Views List of all Facility Head and Students who can register for this website in an organization.</h1>
-	<table>
-		<tr>
-			<c:forEach items="${userType}" var ="ut">
-				<th>${ut}</th>
-			</c:forEach>
-		</tr>
-		<c:forEach items="${users}" var="u">
-			<tr>
-				${u.toString()}
-				<td>
-					<input type="submit" value="Delete"/>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
+	    
+	    
+<form action="AddStudent" method="post">
+	 	<label for="rollno">Roll No.:</label>
+		<input type="text" name="rollno"><br/>
+		
+		<label for="name">Name:</label>
+		<input type="text" name="name"><br/>
+		
+		<label for="batch">Batch:</label>
+		<input type="text" name="batch"><br/>
+		
+		<label for="stream">Stream:</label>
+		<input type="text" name="stream"><br/>
+		
+		${message}
+		<%
+		request.removeAttribute("message");
+		%>
+		
+		<input type="submit" value="Add">
+</form>
 </body>
 </html>
