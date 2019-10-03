@@ -2,13 +2,13 @@ package com.ohdgh.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.ohdgh.model.FacilityHead;
-import com.ohdgh.model.Student;
 
 public class FacilityHeadDao {
 	public List<FacilityHead> listRows()
@@ -41,6 +41,57 @@ public class FacilityHeadDao {
 	}
 	
 	public FacilityHead getRow(String empNo) {
-		return null;
+		String query = "SELECT * FROM [dbo].[FacilityHead] WHERE [EmpNo] = ?";
+		FacilityHead facilityHead = null;
+		try {
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			stmt.setString(1, empNo);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				System.out.println("Fetched Successfully.. ");
+				facilityHead = new FacilityHead();
+				facilityHead.setId(rs.getLong("Id"));
+				facilityHead.setName(rs.getString("Name"));
+				facilityHead.setDepartment(rs.getString("Department"));
+				facilityHead.setEmpNo(rs.getString("EmpNo"));
+				facilityHead.setFacility(rs.getString("Facility"));
+				facilityHead.setSpecialization(rs.getString("Specialization"));
+			}
+            connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return facilityHead;
+	}
+	
+	public boolean addRow(FacilityHead facilityHead) {
+		boolean isSuccess = false;
+		String query = "INSERT INTO [dbo].[FacilityHead] ([Name], [EmpNo], [Department], [Specialization], [Facility]) VALUES (?, ?, ?, ?, ?)";
+		try {
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			
+			stmt.setString(1, facilityHead.getName());
+			stmt.setString(2, facilityHead.getEmpNo());
+			stmt.setString(3, facilityHead.getDepartment());
+			stmt.setString(4, facilityHead.getSpecialization());
+			stmt.setString(5, facilityHead.getFacility());
+			
+			int rowsUpdated = stmt.executeUpdate();
+			System.out.println("Added Successfully..");
+			
+			if(rowsUpdated>0)
+				isSuccess = true;
+			
+            connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return isSuccess;
 	}
 }

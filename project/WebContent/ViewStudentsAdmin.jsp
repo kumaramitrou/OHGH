@@ -32,35 +32,51 @@
 				<li class="dropdown">
 					<a href="javascript:void(0)" class="dropbtn">Students</a>
 					<div class="dropdown-content">
-      					<a href="ViewStudent">View</a>
-      					<a href="AddStudent">Add</a>
+      					<a href="Student">View</a>
+      					<a href="AddStudentAdmin.jsp">Add</a>
     				</div>
 				</li>
 				<li class="dropdown">
 					<a href="javascript:void(0)" class="dropbtn">Facility Head</a>
 					<div class="dropdown-content">
-      					<a href="ViewFacilityHead">View</a>
-      					<a href="AddFacilityHead">Add</a>
+      					<a href="FacilityHead">View</a>
+      					<a href="AddFacilityHeadAdmin.jsp">Add</a>
     				</div>
 				</li>
 				<li class="menuitem"><a href="AboutUs.jsp">About Us</a></li>
 			</ul>
 	    </nav>
 <h1>Views List of all Facility Head and Students who can register for this website in an organization.</h1>
-	<table>
-		<tr>
-			<c:forEach items="${userType}" var ="ut">
-				<th>${ut}</th>
-			</c:forEach>
-		</tr>
-		<c:forEach items="${users}" var="u">
-			<tr>
-				${u.toString()}
-				<td>
-					<input type="submit" value="Delete"/>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
+		<table>
+			<thead>
+				<tr>
+					<th>Roll No.</th>
+					<th>Name</th>
+					<th>Batch</th>
+					<th>Stream</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${students}" var="st" >
+					<tr>
+						<td>${st.getRollNo()}</td>
+						<td>${st.getName()}</td>
+						<td>${st.getBatch()}</td>
+						<td>${st.getStream()}</td>
+						<td>
+							<input type="button" value = "Delete" id = "${st.getId()}" onclick="callDelete(${st.getId()})">
+						</td>
+					</tr>	
+				</c:forEach>
+			</tbody>
+		</table>
+		<script>
+			function callDelete(id){
+				fetch("Student", {
+				    method: 'delete'
+				  });
+				alert("called "+ id);
+			}
+		</script>
 </body>
 </html>

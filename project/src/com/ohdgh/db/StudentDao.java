@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ohdgh.model.Student;
-import com.ohdgh.model.User;
 
 public class StudentDao {
 	public List<Student> listRows()
@@ -37,10 +36,55 @@ public class StudentDao {
 	}
 	
 	public Student getRow(String rollNo) {
-		return null;
+		String query = "SELECT * FROM [dbo].[Student] WHERE [RollNo] = ?";
+		Student student = null;
+		try {
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			stmt.setString(1, rollNo);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				System.out.println("Fetched Successfully.. ");
+				student = new Student();
+				student.setId(rs.getLong("Id"));
+				student.setName(rs.getString("Name"));
+				student.setRollNo(rs.getString("RollNo"));
+				student.setBatch(rs.getString("Batch"));
+				student.setStream(rs.getString("Stream"));
+			}
+            connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return student;
 	}
 	
 	public boolean addRow(Student student) {
-		return true;
+		boolean isSuccess = false;
+		String query = "INSERT INTO [dbo].[Student] ([RollNo], [Name], [Batch], [Stream]) VALUES (?, ?, ?, ?)";
+		try {
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			
+			stmt.setString(1, student.getRollNo());
+			stmt.setString(2, student.getName());
+			stmt.setString(3, student.getBatch());
+			stmt.setString(4, student.getStream());
+			
+			int rowsUpdated = stmt.executeUpdate();
+			System.out.println("Added Successfully..");
+			
+			if(rowsUpdated>0)
+				isSuccess = true;
+			
+            connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return isSuccess;
 	}
 }

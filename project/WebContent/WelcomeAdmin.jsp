@@ -31,15 +31,15 @@
 				<li class="dropdown">
 					<a href="javascript:void(0)" class="dropbtn">Students</a>
 					<div class="dropdown-content">
-      					<a href="ViewStudent">View</a>
-      					<a href="AddStudent">Add</a>
+      					<a href="Student">View</a>
+      					<a href="AddStudentAdmin.jsp">Add</a>
     				</div>
 				</li>
 				<li class="dropdown">
 					<a href="javascript:void(0)" class="dropbtn">Facility Head</a>
 					<div class="dropdown-content">
-      					<a href="ViewFacilityHead">View</a>
-      					<a href="AddFacilityHead">Add</a>
+      					<a href="FacilityHead">View</a>
+      					<a href="AddFacilityHeadAdmin.jsp">Add</a>
     				</div>
 				</li>
 				<li class="menuitem"><a href="AboutUs.jsp">About Us</a></li>

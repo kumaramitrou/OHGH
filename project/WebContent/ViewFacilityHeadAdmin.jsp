@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,29 +46,33 @@
 				<li class="menuitem"><a href="AboutUs.jsp">About Us</a></li>
 			</ul>
 	    </nav>
-Adds Facility Head to the organization.
-<form action="FacilityHead" method="post">
-	 	<label for="empno">Employee No.:</label>
-		<input type="text" name="empno" required><br/>
-		
-		<label for="name">Name:</label>
-		<input type="text" name="name" required><br/>
-		
-		<label for="department">Department:</label>
-		<input type="text" name="department" required><br/>
-		
-		<label for="specialization">Specialization:</label>
-		<input type="text" name="specialization" required><br/>
-		
-		<label for="facility">Facility:</label>
-		<input type="text" name = "facility" required><br/>
-		
-		${message}
-		<%
-		request.removeAttribute("message");
-		%>
-		
-		<input type="submit" value="Add">
-</form>
+<h1>Views List of all Facility Head and Students who can register for this website in an organization.</h1>
+		<table width="500">
+			<thead>
+				<tr>
+					<th>Employee No.</th>
+					<th>Name</th>
+					<th>Department</th>
+					<th>Specialization</th>
+					<th>Facility</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${facilityheads}" var="fh" >
+					<tr>
+						<td>${fh.getEmpNo()}</td>
+						<td>${fh.getName()}</td>
+						<td>${fh.getDepartment()}</td>
+						<td>${fh.getSpecialization()}</td>
+						<td>${fh.getFacility()}</td>
+						<td>
+							<form action="FacilityHead" method="delete">
+								<input type="submit" value="Delete"/>
+							<form>
+						</td>
+					</tr>	
+				</c:forEach>
+			</tbody>
+		</table>
 </body>
 </html>

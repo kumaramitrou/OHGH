@@ -31,15 +31,15 @@
 				<li class="dropdown">
 					<a href="javascript:void(0)" class="dropbtn">Students</a>
 					<div class="dropdown-content">
-      					<a href="ViewStudent">View</a>
-      					<a href="AddStudent">Add</a>
+      					<a href="Student">View</a>
+      					<a href="AddStudentAdmin.jsp">Add</a>
     				</div>
 				</li>
 				<li class="dropdown">
 					<a href="javascript:void(0)" class="dropbtn">Facility Head</a>
 					<div class="dropdown-content">
-      					<a href="ViewFacilityHead">View</a>
-      					<a href="AddFacilityHead">Add</a>
+      					<a href="FacilityHead">View</a>
+      					<a href="AddFacilityHeadAdmin.jsp">Add</a>
     				</div>
 				</li>
 				<li class="menuitem"><a href="AboutUs.jsp">About Us</a></li>
@@ -47,18 +47,18 @@
 	    </nav>
 	    
 	    
-<form action="AddStudent" method="post">
+<form action="Student" method="post">
 	 	<label for="rollno">Roll No.:</label>
-		<input type="text" name="rollno"><br/>
+		<input type="text" name="rollno" required><br/>
 		
 		<label for="name">Name:</label>
-		<input type="text" name="name"><br/>
+		<input type="text" name="name" required><br/>
 		
 		<label for="batch">Batch:</label>
-		<input type="text" name="batch"><br/>
+		<input type="text" name="batch" required><br/>
 		
 		<label for="stream">Stream:</label>
-		<input type="text" name="stream"><br/>
+		<input type="text" name="stream" required><br/>
 		
 		${message}
 		<%

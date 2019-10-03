@@ -23,10 +23,10 @@ Confirm Password: <input type="password" required="required" name="cpass" id="cp
         }
     }
 </script>
-Email: <input type="email" name="email"><br/>
-Security Question: <input type="text" name="seqques"><br/>
-Security Answer: <input type="text" name="seqans"><br/>
-User Name: <input type="text" name="uname"><br/>
+Email: <input type="email" name="email" required><br/>
+Security Question: <input type="text" name="seqques" required><br/>
+Security Answer: <input type="text" name="seqans" required><br/>
+User Name: <input type="text" name="uname" required><br/>
 <input type="radio" name="usertype" value="student" checked/>Student<br/>
 <input type="radio" name="usertype" value="facilityhead"/>Facility Head<br/>
 <input type="submit" value="Sign Up">

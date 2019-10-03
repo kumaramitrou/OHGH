@@ -14,6 +14,7 @@ import com.ohdgh.db.UserDao;
 
 @WebServlet("/Login")
 public class Login extends HttpServlet {
+	private static final long serialVersionUID = -5785128843646570930L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
