@@ -67,13 +67,13 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${students}" var = "st" >
-					<tr>
+					<tr id = "${st.getId()}">
 						<td>${st.getRollNo()}</td>
 						<td>${st.getName()}</td>
 						<td>${st.getBatch()}</td>
 						<td>${st.getStream()}</td>
 						<td>
-							<input type="button" value = "Delete" id = "${st.getId()}" onclick="callDelete(${st.getId()})">
+							<input type="button" value = "Delete" onclick="callDelete(${st.getId()})">
 						</td>
 					</tr>	
 				</c:forEach>
@@ -86,6 +86,8 @@
 					fetch("Student" + "?id=" + id, {
 					    method: 'delete'
 					  });
+					var element = document.getElementById(id);
+					element.parentNode.removeChild(element);
 				}
 			}
 		</script>

@@ -64,7 +64,6 @@ public class FacilityHeadController extends HttpServlet {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		doGet(request, response);
 	}
 
 }
