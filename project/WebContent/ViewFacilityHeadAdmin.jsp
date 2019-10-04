@@ -66,13 +66,21 @@
 						<td>${fh.getSpecialization()}</td>
 						<td>${fh.getFacility()}</td>
 						<td>
-							<form action="FacilityHead" method="delete">
-								<input type="submit" value="Delete"/>
-							<form>
+							<input type="button" value = "Delete" id = "${fh.getId()}" onclick="callDelete(${fh.getId()})">
 						</td>
 					</tr>	
 				</c:forEach>
 			</tbody>
 		</table>
+		<script>
+		function callDelete(id){
+				var flag = confirm("Facility Head will be removed permanently!");
+				if(flag == true){
+					fetch("FacilityHead" + "?id=" + id, {
+					    method: 'delete'
+					  });
+				}
+		}
+		</script>
 </body>
 </html>

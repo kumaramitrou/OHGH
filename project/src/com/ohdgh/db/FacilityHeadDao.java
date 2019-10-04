@@ -16,6 +16,7 @@ public class FacilityHeadDao {
 		String query = "SELECT [Name], [EmpNo], [Department], [Specialization], [Facility], [Id] FROM [dbo].[FacilityHead]";
 		List<FacilityHead> facilityHeads = new ArrayList<FacilityHead>();
 		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
@@ -29,8 +30,6 @@ public class FacilityHeadDao {
 				facilityHead.setFacility(resultSet.getString("Facility"));
 				facilityHead.setId(resultSet.getLong("Id"));
 				facilityHeads.add(facilityHead);
-                System.out.println(resultSet.getString(1) + " "
-                    + resultSet.getString(2));
             }
             connection.close();
 		} catch (Exception e) {
@@ -44,6 +43,7 @@ public class FacilityHeadDao {
 		String query = "SELECT * FROM [dbo].[FacilityHead] WHERE [EmpNo] = ?";
 		FacilityHead facilityHead = null;
 		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement stmt = connection.prepareStatement(query);
 			stmt.setString(1, empNo);
@@ -72,6 +72,7 @@ public class FacilityHeadDao {
 		boolean isSuccess = false;
 		String query = "INSERT INTO [dbo].[FacilityHead] ([Name], [EmpNo], [Department], [Specialization], [Facility]) VALUES (?, ?, ?, ?, ?)";
 		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement stmt = connection.prepareStatement(query);
 			
@@ -91,6 +92,30 @@ public class FacilityHeadDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		}
+		return isSuccess;
+	}
+	
+	public boolean removeRow(String id) {
+		boolean isSuccess = false;
+		String query = "DELETE FROM [dbo].[FacilityHead] WHERE Id = ?";
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			
+			stmt.setString(1, id);
+			
+			int rowsUpdated = stmt.executeUpdate();
+			System.out.println("Deleted Successfully");
+			
+			if(rowsUpdated>0)
+				isSuccess = true;
+			
+			connection.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		return isSuccess;
 	}

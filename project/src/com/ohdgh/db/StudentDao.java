@@ -12,6 +12,7 @@ public class StudentDao {
 		List<Student> students = new ArrayList<Student>();
 		String query = "Select [RollNo], [Name], [Batch], [Stream], [Id] from [dbo].[Student]";
 		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
@@ -24,8 +25,6 @@ public class StudentDao {
 				student.setStream(resultSet.getString("Stream"));
 				student.setId(resultSet.getLong("Id"));
 				students.add(student);
-                System.out.println(resultSet.getString(1) + " "
-                    + resultSet.getString(2));
             }
             connection.close();
 		} catch (Exception e) {
@@ -39,6 +38,7 @@ public class StudentDao {
 		String query = "SELECT * FROM [dbo].[Student] WHERE [RollNo] = ?";
 		Student student = null;
 		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement stmt = connection.prepareStatement(query);
 			stmt.setString(1, rollNo);
@@ -66,6 +66,7 @@ public class StudentDao {
 		boolean isSuccess = false;
 		String query = "INSERT INTO [dbo].[Student] ([RollNo], [Name], [Batch], [Stream]) VALUES (?, ?, ?, ?)";
 		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement stmt = connection.prepareStatement(query);
 			
@@ -84,6 +85,30 @@ public class StudentDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		}
+		return isSuccess;
+	}
+	
+	public boolean removeRow(String id) {
+		boolean isSuccess = false;
+		String query = "DELETE FROM [dbo].[Student] WHERE Id = ?";
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			
+			stmt.setString(1, id);
+			
+			int rowsUpdated = stmt.executeUpdate();
+			System.out.println("Deleted Successfully");
+			
+			if(rowsUpdated>0)
+				isSuccess = true;
+			
+			connection.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		return isSuccess;
 	}

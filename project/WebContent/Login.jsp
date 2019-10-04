@@ -5,11 +5,29 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<link rel="stylesheet" href="CSS/style.css" type="text/css"/>
+<title>Online Help Desk.</title>
 </head>
 <body>
+
+<%
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	//for Http 1.0
+	response.setHeader("Pragma", "no-cache");
+
+	response.setHeader("Expires", "0");//Proxies
+	if(session.getAttribute("username")!=null)
+	{
+		response.sendRedirect((String)session.getAttribute("landingpage"));
+	}
+%>
+
+<header>
+	<img alt="HelpDesk" src="IMAGES/homeImage.jpg" height="58" width="58">
+	<h1>Online Help Desk and Grievance Handling System.</h1>
+</header>
 <h1>Login Page</h1>
-<form>
+<form class="login">
 		
 		<label for="uname">Username:</label>
 		

@@ -57,8 +57,14 @@ public class FacilityHeadController extends HttpServlet {
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("Delete Facility Head Called.");
+		try {
+			FacilityHeadDao dao = new FacilityHeadDao();
+			String empId = request.getParameter("id");
+			dao.removeRow(empId);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		doGet(request, response);
 	}
 
 }

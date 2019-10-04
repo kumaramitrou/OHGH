@@ -57,8 +57,14 @@ public class StudentController extends HttpServlet {
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Delete Student Called.");
-		// TODO Auto-generated method stub
+		try {
+			StudentDao dao = new StudentDao();
+			String empId = request.getParameter("id");
+			dao.removeRow(empId);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		doGet(request, response);
 	}
 
 }

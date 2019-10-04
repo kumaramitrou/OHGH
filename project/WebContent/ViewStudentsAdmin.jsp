@@ -6,6 +6,9 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="CSS/navbar.css"/>
+<link rel="stylesheet" href="CSS/style.css"/>
+<script src="SCRIPT/script.js">
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -20,6 +23,12 @@
 		response.sendRedirect("Login.jsp");
 	}
 %>
+
+<header>
+	<img alt="HelpDesk" src="IMAGES/homeImage.jpg" height="58" width="58">
+	<h1>Online Help Desk and Grievance Handling System.</h1>
+</header>
+
 <h1>Admin's Landing Page.</h1>
 <form action="Logout">
 <input type="submit" value="Log Out">
@@ -46,7 +55,7 @@
 				<li class="menuitem"><a href="AboutUs.jsp">About Us</a></li>
 			</ul>
 	    </nav>
-<h1>Views List of all Facility Head and Students who can register for this website in an organization.</h1>
+<h1>Students of our College.</h1>
 		<table>
 			<thead>
 				<tr>
@@ -57,7 +66,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${students}" var="st" >
+				<c:forEach items="${students}" var = "st" >
 					<tr>
 						<td>${st.getRollNo()}</td>
 						<td>${st.getName()}</td>
@@ -72,10 +81,12 @@
 		</table>
 		<script>
 			function callDelete(id){
-				fetch("Student", {
-				    method: 'delete'
-				  });
-				alert("called "+ id);
+				var flag = confirm("Student will be removed permanently!");
+				if(flag == true){
+					fetch("Student" + "?id=" + id, {
+					    method: 'delete'
+					  });
+				}
 			}
 		</script>
 </body>

@@ -5,6 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="CSS/navbar.css"/>
+<link rel="stylesheet" href="CSS/style.css"/>
 <title>Insert title here</title>
 </head>
 <body>
@@ -19,6 +20,13 @@
 		response.sendRedirect("Login.jsp");
 	}
 %>
+
+
+<header>
+	<img alt="HelpDesk" src="IMAGES/homeImage.jpg" height="58" width="58">
+	<h1>Online Help Desk and Grievance Handling System.</h1>
+</header>
+
 <h1>Admin's Landing Page.</h1>
 <form action="Logout">
 <input type="submit" value="Log Out">
