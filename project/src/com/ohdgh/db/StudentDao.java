@@ -12,7 +12,7 @@ public class StudentDao {
 		List<Student> students = new ArrayList<Student>();
 		String query = "Select [RollNo], [Name], [Batch], [Stream], [Id] from [dbo].[Student]";
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(DatabaseCredentials.driver);
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
@@ -38,7 +38,7 @@ public class StudentDao {
 		String query = "SELECT * FROM [dbo].[Student] WHERE [RollNo] = ?";
 		Student student = null;
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(DatabaseCredentials.driver);
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement stmt = connection.prepareStatement(query);
 			stmt.setString(1, rollNo);
@@ -66,7 +66,7 @@ public class StudentDao {
 		boolean isSuccess = false;
 		String query = "INSERT INTO [dbo].[Student] ([RollNo], [Name], [Batch], [Stream]) VALUES (?, ?, ?, ?)";
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(DatabaseCredentials.driver);
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement stmt = connection.prepareStatement(query);
 			
@@ -93,7 +93,7 @@ public class StudentDao {
 		boolean isSuccess = false;
 		String query = "DELETE FROM [dbo].[Student] WHERE Id = ?";
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(DatabaseCredentials.driver);
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement stmt = connection.prepareStatement(query);
 			
@@ -109,6 +109,7 @@ public class StudentDao {
 			
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return isSuccess;
 	}

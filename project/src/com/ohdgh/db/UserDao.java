@@ -16,7 +16,33 @@ public class UserDao {
 	
 	public boolean addUser(User user)
 	{
-		return false;
+		boolean isSuccess = false;
+		String query = "INSERT INTO [dbo].[User] ([Name], [Email], [Password], [Question], [Answer], [Status], [HomePage], [UserName]) VALUES (?, ?, ?, ?, ?, 1, ?, ?)";
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			
+			stmt.setString(1, user.getName());
+			stmt.setString(2, user.getEmail());
+			stmt.setString(3, user.getPassword());
+			stmt.setString(4, user.getQuestion());
+			stmt.setString(5, user.getAnswer());
+			stmt.setString(6, user.getType());
+			stmt.setString(7, user.getUserName());
+			
+			int rowsUpdated = stmt.executeUpdate();
+			System.out.println("User Added Successfully..");
+			
+			if(rowsUpdated>0)
+				isSuccess = true;
+			
+            connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return isSuccess;
 	}
 	
 	public boolean checkCredential(String uname, String password)
@@ -24,7 +50,7 @@ public class UserDao {
 		String query = "select * from [dbo].[User] where [UserName] = ? and [Password] = ?";
 		try {
 			
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(DatabaseCredentials.driver);
 			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement st = con.prepareStatement(query);
 			
@@ -49,7 +75,7 @@ public class UserDao {
 		String query = "select * from [dbo].[User] where [UserName] = ?";
 		try {
 			
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(DatabaseCredentials.driver);
 			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement st = con.prepareStatement(query);
 			
@@ -70,7 +96,7 @@ public class UserDao {
 		String query = "select [HomePage] from [dbo].[User] where [UserName] = ?";
 		String landingPage = null;
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(DatabaseCredentials.driver);
 			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement st = con.prepareStatement(query);
 			
@@ -87,5 +113,43 @@ public class UserDao {
 			// TODO: handle exception
 		}
 		return landingPage;
+	}
+	
+	public boolean isEmailExist(String userEmail) {
+		String query = "SELECT [Id] FROM [dbo].[User] where [Email] = ?";
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = con.prepareStatement(query);
+			
+			stmt.setString(1, userEmail);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			return rs.next();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean isUserNameExist(String userName) {
+		String query = "SELECT [Id] FROM [dbo].[User] where [UserName] = ?";
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = con.prepareStatement(query);
+			
+			stmt.setString(1, userName);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			return rs.next();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

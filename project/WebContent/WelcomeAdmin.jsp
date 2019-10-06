@@ -53,5 +53,7 @@
 				<li class="menuitem"><a href="AboutUs.jsp">About Us</a></li>
 			</ul>
 	    </nav>
+	    <section>
+	    </section>
 </body>
 </html>

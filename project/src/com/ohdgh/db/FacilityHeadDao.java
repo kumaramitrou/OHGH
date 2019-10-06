@@ -16,7 +16,7 @@ public class FacilityHeadDao {
 		String query = "SELECT [Name], [EmpNo], [Department], [Specialization], [Facility], [Id] FROM [dbo].[FacilityHead]";
 		List<FacilityHead> facilityHeads = new ArrayList<FacilityHead>();
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(DatabaseCredentials.driver);
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
@@ -43,7 +43,7 @@ public class FacilityHeadDao {
 		String query = "SELECT * FROM [dbo].[FacilityHead] WHERE [EmpNo] = ?";
 		FacilityHead facilityHead = null;
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(DatabaseCredentials.driver);
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement stmt = connection.prepareStatement(query);
 			stmt.setString(1, empNo);
@@ -72,7 +72,7 @@ public class FacilityHeadDao {
 		boolean isSuccess = false;
 		String query = "INSERT INTO [dbo].[FacilityHead] ([Name], [EmpNo], [Department], [Specialization], [Facility]) VALUES (?, ?, ?, ?, ?)";
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(DatabaseCredentials.driver);
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement stmt = connection.prepareStatement(query);
 			
@@ -100,7 +100,7 @@ public class FacilityHeadDao {
 		boolean isSuccess = false;
 		String query = "DELETE FROM [dbo].[FacilityHead] WHERE Id = ?";
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(DatabaseCredentials.driver);
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement stmt = connection.prepareStatement(query);
 			
