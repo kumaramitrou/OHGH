@@ -52,7 +52,6 @@
     <p class="navbar-text navbar-right">Welcome ${username}</p>
   </div>
 </nav>
-
 <div class="container">
 	<table class="table table-hover">
 		<thead>
@@ -61,6 +60,7 @@
 				<th>Name</th>
 				<th>Batch</th>
 				<th>Stream</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>

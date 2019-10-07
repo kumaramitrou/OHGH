@@ -55,7 +55,7 @@
    				<input type="password" class="form-control" id="pwd" placeholder="Password" name="pass">
   			</div>
   			<button type="submit" class="btn btn-primary">Login</button>
-  					${message}
+  					<span style="color: red">${message}</span>
 					<%
 						request.removeAttribute("message");
 					%>

@@ -3,9 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<link rel="stylesheet" href="CSS/navbar.css"/>
-<title>Insert title here</title>
+<meta charset="ISO-8859-1" name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="SCRIPT/script.js"></script>
+  <link rel="icon" href="./IMAGES/homeImage.jpg">
+<title>Online Help Desk.</title>
 </head>
 <body>
 <%
@@ -19,53 +23,67 @@
 		response.sendRedirect("Login.jsp");
 	}
 %>
-<h1>Admin's Landing Page.</h1>
-<form action="Logout">
-<input type="submit" value="Log Out">
-</form>
-<h4>Welcome ${username}</h4>
-
-		<nav id="menu">
-			<ul>
-				<li class="menuitem"><a href="<%= (String)session.getAttribute("landingpage") %>">Home</a></li>
-				<li class="dropdown">
-					<a href="javascript:void(0)" class="dropbtn">Students</a>
-					<div class="dropdown-content">
-      					<a href="Student">View</a>
-      					<a href="AddStudentAdmin.jsp">Add</a>
-    				</div>
-				</li>
-				<li class="dropdown">
-					<a href="javascript:void(0)" class="dropbtn">Facility Head</a>
-					<div class="dropdown-content">
-      					<a href="FacilityHead">View</a>
-      					<a href="AddFacilityHeadAdmin.jsp">Add</a>
-    				</div>
-				</li>
-				<li class="menuitem"><a href="AboutUs.jsp">About Us</a></li>
-			</ul>
-	    </nav>
-	    
-	    
-<form action="Student" method="post">
-	 	<label for="rollno">Roll No.:</label>
-		<input type="text" name="rollno" required><br/>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="<%= (String)session.getAttribute("landingpage") %>">Help Desk and Grievance Handling.</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="<%= (String)session.getAttribute("landingpage") %>">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Student<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="Student">View</a></li>
+          <li><a href="AddStudentAdmin.jsp">Add</a></li>
+        </ul>
+      </li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Facility Head<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="FacilityHead">View</a></li>
+          <li><a href="AddFacilityHeadAdmin.jsp">Add</a></li>
+        </ul>
+      </li>
+      <li><a href="AboutUs.jsp">About Us </a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="Logout"><span class="glyphicon glyphicon-log-out"></span>Log Out</a></li>
+    </ul>
+    <p class="navbar-text navbar-right">Welcome ${username}</p>
+  </div>
+</nav>
+<div style="width:50%; position:absolute; transform: translate(50%, 0%);">
+    <div class="panel panel-info">
+      <div class="panel-heading"><h3>Register a new Student to Organization.</h3></div>
+      <div class="panel-body">   
+			<form action="Student" method="post">
+			
+				<div class="form-group">
+    				<label for="rollno">Roll No.:</label>
+    				<input type="text" class="form-control" id="rollno" aria-describedby="emailHelp" placeholder="Enter Roll no." name="rollno" required>
+  				</div>
+  				
+  				<div class="form-group">
+    				<label for="name">Name:</label>
+    				<input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter name" name="name" required>
+  				</div>
+  				
+  				<div class="form-group">
+    				<label for="batch">Batch:</label>
+    				<input type="text" class="form-control" id="batch" aria-describedby="emailHelp" placeholder="Enter batch" name="batch" required>
+  				</div>
+  				
+  				<div class="form-group">
+    				<label for="batch">Stream:</label>
+    				<input type="text" class="form-control" id="stream" aria-describedby="emailHelp" placeholder="Enter stream" name="stream" required>
+  				</div>
 		
-		<label for="name">Name:</label>
-		<input type="text" name="name" required><br/>
-		
-		<label for="batch">Batch:</label>
-		<input type="text" name="batch" required><br/>
-		
-		<label for="stream">Stream:</label>
-		<input type="text" name="stream" required><br/>
-		
-		${message}
-		<%
-		request.removeAttribute("message");
-		%>
-		
-		<input type="submit" value="Add">
-</form>
+				<button type="submit" class="btn btn-success" value ="Add"><span class="glyphicon glyphicon-plus"></span> Add</button>
+				${message}
+				<%
+				request.removeAttribute("message");
+				%>
+			</form>
+		</div>
+	</div>
+</div>
 </body>
 </html>
