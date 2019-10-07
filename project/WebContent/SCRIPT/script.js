@@ -7,3 +7,14 @@ function check(input) {
             input.setCustomValidity('');
         }
     }
+
+function callDelete(id){
+	var flag = confirm("Student will be removed permanently!");
+	if(flag == true){
+		fetch("Student" + "?id=" + id, {
+		    method: 'delete'
+		  });
+		var element = document.getElementById(id);
+		element.parentNode.removeChild(element);
+	}
+}
