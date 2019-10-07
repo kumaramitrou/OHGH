@@ -34,7 +34,7 @@ public class StudentDao {
 		return students;
 	}
 	
-	public Student getRow(String rollNo) {
+	public Student getRowByRollNo(String rollNo) {
 		String query = "SELECT * FROM [dbo].[Student] WHERE [RollNo] = ?";
 		Student student = null;
 		try {
@@ -42,6 +42,34 @@ public class StudentDao {
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement stmt = connection.prepareStatement(query);
 			stmt.setString(1, rollNo);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				System.out.println("Fetched Successfully.. ");
+				student = new Student();
+				student.setId(rs.getLong("Id"));
+				student.setName(rs.getString("Name"));
+				student.setRollNo(rs.getString("RollNo"));
+				student.setBatch(rs.getString("Batch"));
+				student.setStream(rs.getString("Stream"));
+			}
+            connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return student;
+	}
+	
+	public Student getRowById(String id) {
+		String query = "SELECT * FROM [dbo].[Student] WHERE [Id] = ?";
+		Student student = null;
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			stmt.setString(1, id);
 			
 			ResultSet rs = stmt.executeQuery();
 			

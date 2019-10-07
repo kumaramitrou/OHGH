@@ -55,6 +55,12 @@ public class User {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	public String getUid() {
+		return uid;
+	}
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
 	private String name;
 	private String password;
 	private String email;
@@ -64,4 +70,5 @@ public class User {
 	private long id;
 	private String userName;
 	private boolean status;
+	private String uid;
 }

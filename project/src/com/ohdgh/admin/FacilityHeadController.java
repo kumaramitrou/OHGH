@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ohdgh.db.FacilityHeadDao;
+import com.ohdgh.db.UserDao;
 import com.ohdgh.model.FacilityHead;
 
 @WebServlet("/FacilityHead")
@@ -32,7 +33,7 @@ public class FacilityHeadController extends HttpServlet {
 		try {
 			FacilityHeadDao dao = new FacilityHeadDao();
 			String empNo = request.getParameter("empno");
-			if(dao.getRow(empNo) == null) {
+			if(dao.getRowByEmpNo(empNo) == null) {
 				
 				//add FacilityHead
 				FacilityHead facilityHead = new FacilityHead();
@@ -58,11 +59,16 @@ public class FacilityHeadController extends HttpServlet {
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			FacilityHeadDao dao = new FacilityHeadDao();
 			String empId = request.getParameter("id");
+			FacilityHeadDao dao = new FacilityHeadDao();
+			UserDao userDao = new UserDao();
+			FacilityHead facilityHead = dao.getRowById(empId);
+			System.out.println(empId);
+			userDao.removeUserByUid(facilityHead.getEmpNo());
 			dao.removeRow(empId);
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 

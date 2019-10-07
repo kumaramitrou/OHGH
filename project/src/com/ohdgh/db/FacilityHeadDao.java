@@ -39,7 +39,7 @@ public class FacilityHeadDao {
 		return facilityHeads;
 	}
 	
-	public FacilityHead getRow(String empNo) {
+	public FacilityHead getRowByEmpNo(String empNo) {
 		String query = "SELECT * FROM [dbo].[FacilityHead] WHERE [EmpNo] = ?";
 		FacilityHead facilityHead = null;
 		try {
@@ -47,6 +47,35 @@ public class FacilityHeadDao {
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement stmt = connection.prepareStatement(query);
 			stmt.setString(1, empNo);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				System.out.println("Fetched Successfully.. ");
+				facilityHead = new FacilityHead();
+				facilityHead.setId(rs.getLong("Id"));
+				facilityHead.setName(rs.getString("Name"));
+				facilityHead.setDepartment(rs.getString("Department"));
+				facilityHead.setEmpNo(rs.getString("EmpNo"));
+				facilityHead.setFacility(rs.getString("Facility"));
+				facilityHead.setSpecialization(rs.getString("Specialization"));
+			}
+            connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return facilityHead;
+	}
+	
+	public FacilityHead getRowById(String id) {
+		String query = "SELECT * FROM [dbo].[FacilityHead] WHERE [Id] = ?";
+		FacilityHead facilityHead = null;
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			stmt.setString(1, id);
 			
 			ResultSet rs = stmt.executeQuery();
 			

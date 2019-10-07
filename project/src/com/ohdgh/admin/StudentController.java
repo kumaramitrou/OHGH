@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ohdgh.db.StudentDao;
+import com.ohdgh.db.UserDao;
 import com.ohdgh.model.Student;
 
 @WebServlet("/Student")
@@ -32,7 +33,7 @@ public class StudentController extends HttpServlet {
 		try {
 			StudentDao dao = new StudentDao();
 			String rollNo = request.getParameter("rollno");
-			if(dao.getRow(rollNo) == null) {
+			if(dao.getRowByRollNo(rollNo) == null) {
 				
 				//add student
 				Student student = new Student();
@@ -58,11 +59,16 @@ public class StudentController extends HttpServlet {
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			String studentId = request.getParameter("id");
 			StudentDao dao = new StudentDao();
-			String empId = request.getParameter("id");
-			dao.removeRow(empId);
+			UserDao userDao = new UserDao();
+			Student student = dao.getRowById(studentId);
+			System.out.println(studentId);
+			userDao.removeUserByUid(student.getRollNo());
+			dao.removeRow(studentId);
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 

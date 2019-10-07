@@ -17,7 +17,7 @@ public class UserDao {
 	public boolean addUser(User user)
 	{
 		boolean isSuccess = false;
-		String query = "INSERT INTO [dbo].[User] ([Name], [Email], [Password], [Question], [Answer], [Status], [HomePage], [UserName]) VALUES (?, ?, ?, ?, ?, 1, ?, ?)";
+		String query = "INSERT INTO [dbo].[User] ([Name], [Email], [Password], [Question], [Answer], [Status], [HomePage], [UserName], [UID]) VALUES (?, ?, ?, ?, ?, 1, ?, ?, ?)";
 		try {
 			Class.forName(DatabaseCredentials.driver);
 			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
@@ -30,6 +30,7 @@ public class UserDao {
 			stmt.setString(5, user.getAnswer());
 			stmt.setString(6, user.getType());
 			stmt.setString(7, user.getUserName());
+			stmt.setString(8, user.getUid());
 			
 			int rowsUpdated = stmt.executeUpdate();
 			System.out.println("User Added Successfully..");
@@ -151,5 +152,53 @@ public class UserDao {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public boolean isUIDExist(String uid) {
+		String query = "SELECT [Id] FROM [dbo].[User] where [UID] = ?";
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = con.prepareStatement(query);
+			
+			stmt.setString(1, uid);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			return rs.next();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean removeUserByUid(String uid) {
+		boolean isSuccess = false;
+		String query = "DELETE FROM [dbo].[User] WHERE [UID] = ?";
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			
+			stmt.setString(1, uid);
+			System.out.println(query);
+			
+			int rowsUpdated = stmt.executeUpdate();
+		System.out.println(rowsUpdated);
+			
+			if(rowsUpdated>0) {
+				
+				System.out.println("Deleted Successfully");
+				isSuccess = true;
+			}
+			
+			connection.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return isSuccess;
 	}
 }

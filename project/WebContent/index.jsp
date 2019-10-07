@@ -11,7 +11,17 @@
 <title>Online Help Desk.</title>
 </head>
 <body>
+<%
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	//for Http 1.0
+	response.setHeader("Pragma", "no-cache");
 
+	response.setHeader("Expires", "0");//Proxies
+	if(session.getAttribute("username")!=null)
+	{
+		response.sendRedirect((String)session.getAttribute("landingpage"));
+	}
+%>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">

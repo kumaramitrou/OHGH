@@ -38,11 +38,18 @@ public class SignUp extends HttpServlet {
 			rd.forward(request, response);
 		}
 		user.setType(request.getParameter("usertype"));
-		String uid = request.getParameter("uid");
+		user.setUid(request.getParameter("uid"));
+		if(dao.isUIDExist(user.getUid())) {
+			//check Uid exist.
+			addUser = false;
+			request.setAttribute("message", "User with same UID already exist.");
+			RequestDispatcher rd = request.getRequestDispatcher("SignUp.jsp");
+			rd.forward(request, response);
+		}
 		if(user.getType().equalsIgnoreCase("WelcomeStudent.jsp")) {
 			//check roll no exist.
 			StudentDao studentDao = new StudentDao();
-			if(studentDao.getRow(uid)==null) {
+			if(studentDao.getRowByRollNo(user.getUid())==null) {
 				addUser = false;
 				request.setAttribute("message", "Roll Number is not added, please contact admin.");
 				RequestDispatcher rd = request.getRequestDispatcher("SignUp.jsp");
@@ -52,7 +59,7 @@ public class SignUp extends HttpServlet {
 		if(user.getType().equalsIgnoreCase("WelcomeFacilityHead.jsp")) {
 			//check employee id exist
 			FacilityHeadDao facilityHeadDao = new FacilityHeadDao();
-			if (facilityHeadDao.getRow(uid)==null) {
+			if (facilityHeadDao.getRowByEmpNo(user.getUid())==null) {
 				addUser = false;
 				request.setAttribute("message", "Employee Id is not added, please contact admin.");
 				RequestDispatcher rd = request.getRequestDispatcher("SignUp.jsp");
@@ -70,5 +77,4 @@ public class SignUp extends HttpServlet {
 			rd.forward(request, response);
 		}
 	}
-
 }
