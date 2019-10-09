@@ -37,6 +37,7 @@ public class Login extends HttpServlet {
 			// Fetch Landing page based on user
 			String landingPage = userDao.userLandingPage(uname);
 			session.setAttribute("landingpage", landingPage);
+			session.setAttribute("notif", 2);
 			response.sendRedirect(landingPage);
 		} else {
 			request.setAttribute("message", "Invalid User Name or Password.");

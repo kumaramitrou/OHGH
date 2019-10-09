@@ -52,7 +52,10 @@
     <p class="navbar-text navbar-right">Welcome ${username}</p>
   </div>
 </nav>
+
 <div class="container">
+<h2 style="color:#07C2B4"> Students.</h2>
+<hr>
 	<table class="table table-hover">
 		<thead>
 			<tr>
