@@ -13,7 +13,7 @@ Few Softwares and Tools which you need are
   * Eclipse. (Integrated Development Environment)
   * Apache Tomcat Server. (Server)
   
-__Note: __ ***Please refer SetupInstructions.txt file for setting up environment in your local system.***
+__Note:__ ***Please refer SetupInstructions.txt file for setting up environment in your local system.***
 
 ## Future Scope
   * Can view uploaded documents in portal.
