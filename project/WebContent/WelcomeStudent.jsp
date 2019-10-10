@@ -47,7 +47,7 @@
         </ul>
       </li>
       <li><a href="#">Updates<span class="badge" id="update">${update}</span></a></li>
-      <li><a href="Notification">Notification<span class="badge" id="notif">${notif}</span></a></li>
+      <li><a href="Notification">Notifications<span class="badge" id="notif">${notif}</span></a></li>
       <li><a href="ChangePassword.jsp">Change Password</a></li>
       <li><a href="AboutUs.jsp">About Us </a></li>
     </ul>

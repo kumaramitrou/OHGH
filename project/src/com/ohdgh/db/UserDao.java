@@ -201,4 +201,23 @@ public class UserDao {
 		}
 		return isSuccess;
 	}
+	
+	public boolean changePassword(String userName, String password) {
+		try {
+			String query = "UPDATE [dbo].[User] SET Password = ? WHERE [UserName] = ?";
+			
+			Class.forName(DatabaseCredentials.driver);
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			
+			stmt.setString(1, password);
+			stmt.setString(2, userName);
+			
+			return stmt.executeUpdate() > 0;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

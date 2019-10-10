@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ohdgh.db.NotificationDao;
 import com.ohdgh.db.UserDao;
 
 @WebServlet("/Login")
@@ -37,7 +38,12 @@ public class Login extends HttpServlet {
 			// Fetch Landing page based on user
 			String landingPage = userDao.userLandingPage(uname);
 			session.setAttribute("landingpage", landingPage);
-			session.setAttribute("notif", 2);
+			
+			// Set Notification count
+			NotificationDao notifDao = new NotificationDao();
+			int notifCount = notifDao.getCount(uname);
+			session.setAttribute("notif", notifCount > 0 ? notifCount : "");
+			
 			response.sendRedirect(landingPage);
 		} else {
 			request.setAttribute("message", "Invalid User Name or Password.");
