@@ -26,3 +26,4 @@ Few Softwares and Tools which you need are
   * Code could be made more generic.
   * Website could have been more responsive.
   * Could have used Collated Database.
+  * Exception Logging.
