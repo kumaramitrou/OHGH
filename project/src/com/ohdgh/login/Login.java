@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ohdgh.db.NotificationDao;
+import com.ohdgh.db.UpdateDao;
 import com.ohdgh.db.UserDao;
 
 @WebServlet("/Login")
@@ -43,6 +44,10 @@ public class Login extends HttpServlet {
 			NotificationDao notifDao = new NotificationDao();
 			int notifCount = notifDao.getCount(uname);
 			session.setAttribute("notif", notifCount > 0 ? notifCount : "");
+			
+			UpdateDao updateDao = new UpdateDao();
+			int updateCount = updateDao.getCount();
+			session.setAttribute("update", updateCount > 0 ? updateCount : "");
 			
 			response.sendRedirect(landingPage);
 		} else {

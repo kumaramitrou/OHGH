@@ -49,6 +49,7 @@ public class UserDao {
 	public boolean checkCredential(String uname, String password)
 	{
 		String query = "select * from [dbo].[User] where [UserName] = ? and [Password] = ?";
+		boolean credCorrect = false;
 		try {
 			
 			Class.forName(DatabaseCredentials.driver);
@@ -60,20 +61,20 @@ public class UserDao {
 			
 			ResultSet rs = st.executeQuery();
 			
-			if(rs.next())
-			{
-				return true;
-			}
+			credCorrect = rs.next();
+			
+			con.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
-		return false;
+		return credCorrect;
 	}
 	
 	public boolean isExist(String uname)
 	{
 		String query = "select * from [dbo].[User] where [UserName] = ?";
+		boolean userExist = false;
 		try {
 			
 			Class.forName(DatabaseCredentials.driver);
@@ -84,12 +85,13 @@ public class UserDao {
 			
 			ResultSet rs = st.executeQuery();
 			
-			return rs.next();
+			userExist = rs.next();
 			
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
-		return false;
+		return userExist;
 	}
 	
 	public String userLandingPage(String uname)
@@ -109,6 +111,7 @@ public class UserDao {
 				landingPage = rs.getString(1);
 				System.out.println(landingPage);
 			}
+			con.close();
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -118,6 +121,7 @@ public class UserDao {
 	
 	public boolean isEmailExist(String userEmail) {
 		String query = "SELECT [Id] FROM [dbo].[User] where [Email] = ?";
+		boolean emailExist = false;
 		try {
 			Class.forName(DatabaseCredentials.driver);
 			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
@@ -127,16 +131,18 @@ public class UserDao {
 			
 			ResultSet rs = stmt.executeQuery();
 			
-			return rs.next();
+			emailExist = rs.next();
+			con.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return false;
+		return emailExist;
 	}
 	
 	public boolean isUserNameExist(String userName) {
 		String query = "SELECT [Id] FROM [dbo].[User] where [UserName] = ?";
+		boolean userNameExist = false;
 		try {
 			Class.forName(DatabaseCredentials.driver);
 			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
@@ -146,16 +152,18 @@ public class UserDao {
 			
 			ResultSet rs = stmt.executeQuery();
 			
-			return rs.next();
+			userNameExist = rs.next();
+			con.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return false;
+		return userNameExist;
 	}
 	
 	public boolean isUIDExist(String uid) {
 		String query = "SELECT [Id] FROM [dbo].[User] where [UID] = ?";
+		boolean uidExist = false;
 		try {
 			Class.forName(DatabaseCredentials.driver);
 			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
@@ -165,12 +173,13 @@ public class UserDao {
 			
 			ResultSet rs = stmt.executeQuery();
 			
-			return rs.next();
+			uidExist = rs.next();
+			con.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return false;
+		return uidExist;
 	}
 
 	public boolean removeUserByUid(String uid) {
@@ -203,6 +212,7 @@ public class UserDao {
 	}
 	
 	public boolean changePassword(String userName, String password) {
+		boolean passwordChanged = false;
 		try {
 			String query = "UPDATE [dbo].[User] SET Password = ? WHERE [UserName] = ?";
 			
@@ -213,11 +223,12 @@ public class UserDao {
 			stmt.setString(1, password);
 			stmt.setString(2, userName);
 			
-			return stmt.executeUpdate() > 0;
+			passwordChanged = stmt.executeUpdate() > 0;
+			connection.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return false;
+		return passwordChanged;
 	}
 }

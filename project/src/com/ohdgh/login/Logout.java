@@ -24,6 +24,7 @@ public class Logout extends HttpServlet {
 		session.removeAttribute("landingpage");
 		session.removeAttribute("notif");
 		session.removeAttribute("message");
+		session.removeAttribute("update");
 		session.invalidate();
 		response.sendRedirect("Login.jsp");
 	}
