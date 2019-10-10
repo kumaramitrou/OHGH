@@ -60,27 +60,27 @@
 			
 				<div class="form-group">
     				<label for="empno">Employee No.:</label>
-    				<input type="text" class="form-control" id="empno" aria-describedby="emailHelp" placeholder="Enter Employee no." name="empno" required>
+    				<input type="text" class="form-control" id="empno" aria-describedby="emailHelp" placeholder="Employee no." name="empno" required>
   				</div>
   				
   				<div class="form-group">
     				<label for="name">Name:</label>
-    				<input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter name" name="name" required>
+    				<input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name" name="name" required>
   				</div>
   				
   				<div class="form-group">
     				<label for="department">Department:</label>
-    				<input type="text" class="form-control" id="department" aria-describedby="emailHelp" placeholder="Enter department" name="department" required>
+    				<input type="text" class="form-control" id="department" aria-describedby="emailHelp" placeholder="Department" name="department" required>
   				</div>
   				
   				<div class="form-group">
     				<label for="specialization">Specialization:</label>
-    				<input type="text" class="form-control" id="specialization" aria-describedby="emailHelp" placeholder="Enter specialization" name="specialization" required>
+    				<input type="text" class="form-control" id="specialization" aria-describedby="emailHelp" placeholder="Specialization" name="specialization" required>
   				</div>
   				
   				<div class="form-group">
     				<label for="facility">Facility:</label>
-    				<input type="text" class="form-control" id="facility" aria-describedby="emailHelp" placeholder="Enter facility" name="facility" required>
+    				<input type="text" class="form-control" id="facility" aria-describedby="emailHelp" placeholder="Facility" name="facility" required>
   				</div>
 		
 				<button type="submit" class="btn btn-success" value ="Add"><span class="glyphicon glyphicon-plus"></span> Add</button>
