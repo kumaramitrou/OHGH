@@ -50,7 +50,7 @@
   			</div>
   			<div class="form-group">
     			<label for="pass">New Password:</label>
-    			<input type="password" class="form-control" id="pass" aria-describedby="emailHelp" placeholder="Enter new password" name="pass" required>
+    			<input type="password" class="form-control" id="pass" aria-describedby="emailHelp" placeholder="New password" name="pass" required>
   			</div>
   			<div class="form-group">
     			<label for="cpass">Confirm password:</label>

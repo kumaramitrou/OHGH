@@ -68,6 +68,12 @@ public class SignUp extends HttpServlet {
 		}
 		user.setName(request.getParameter("name"));
 		user.setPassword(request.getParameter("pass"));
+		if(user.getPassword() == null || user.getPassword().length() < 8) {
+			addUser = false;
+			request.setAttribute("message", "Password should have atleast 8 characters.");
+			RequestDispatcher rd = request.getRequestDispatcher("SignUp.jsp");
+			rd.forward(request, response);
+		}
 		user.setQuestion(request.getParameter("secques"));
 		user.setAnswer(request.getParameter("secans"));
 		if (addUser) {

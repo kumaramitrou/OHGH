@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,5 +40,22 @@
     <p class="navbar-text navbar-right">Welcome ${username}</p>
   </div>
 </nav>
+
+<div class="container">
+  <h2><strong>Notifications</strong></h2>
+  <c:forEach items="${notifications}" var = "nt" >
+  	<div class="panel panel-success">
+      <div class="panel-heading"><strong>${nt.getSubject()} - ( ${nt.getRequestId()} )</strong></div>
+      <div class="panel-body">
+      ${nt.getMessage()}
+      </div>
+  	</div>
+  </c:forEach>
+  <h3>${message}</h3>
+      <%
+      	request.removeAttribute("message");
+      %>
+</div>
+
 </body>
 </html>

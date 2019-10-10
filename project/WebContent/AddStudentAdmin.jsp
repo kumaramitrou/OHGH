@@ -58,22 +58,22 @@
 			
 				<div class="form-group">
     				<label for="rollno">Roll No.:</label>
-    				<input type="text" class="form-control" id="rollno" aria-describedby="emailHelp" placeholder="Enter Roll no." name="rollno" required>
+    				<input type="text" class="form-control" id="rollno" aria-describedby="emailHelp" placeholder="Roll no." name="rollno" required>
   				</div>
   				
   				<div class="form-group">
     				<label for="name">Name:</label>
-    				<input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter name" name="name" required>
+    				<input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name" name="name" required>
   				</div>
   				
   				<div class="form-group">
     				<label for="batch">Batch:</label>
-    				<input type="text" class="form-control" id="batch" aria-describedby="emailHelp" placeholder="Enter batch" name="batch" required>
+    				<input type="text" class="form-control" id="batch" aria-describedby="emailHelp" placeholder="Batch" name="batch" required>
   				</div>
   				
   				<div class="form-group">
     				<label for="batch">Stream:</label>
-    				<input type="text" class="form-control" id="stream" aria-describedby="emailHelp" placeholder="Enter stream" name="stream" required>
+    				<input type="text" class="form-control" id="stream" aria-describedby="emailHelp" placeholder="Stream" name="stream" required>
   				</div>
 		
 				<button type="submit" class="btn btn-success" value ="Add"><span class="glyphicon glyphicon-plus"></span> Add</button>

@@ -47,8 +47,8 @@
       <div class="panel-body">
       	<form action="Login">
   			<div class="form-group">
-    			<label for="uname">User Name:</label>
-    			<input type="text" class="form-control" id="uname" aria-describedby="emailHelp" placeholder="Enter username" name="uname">
+    			<label for="uname">Username:</label>
+    			<input type="text" class="form-control" id="uname" aria-describedby="emailHelp" placeholder="Username" name="uname">
   			</div>
   			<div class="form-group">
     			<label for="pwd">Password:</label>
@@ -63,8 +63,6 @@
       </div>
     </div>
    </div>
-
-
 
 </body>
 </html>

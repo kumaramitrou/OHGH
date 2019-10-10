@@ -148,4 +148,26 @@ public class FacilityHeadDao {
 		}
 		return isSuccess;
 	}
+	
+	public boolean distinctFacility(String facilityName) {
+		boolean isDistinct = true;
+		try {
+			String query = "Select [Id] from [dbo].[FacilityHead] where [Facility] = ?";
+			Class.forName(DatabaseCredentials.driver);
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			
+			stmt.setString(1, facilityName);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			isDistinct = !rs.next();
+			
+			connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return isDistinct;
+	}
 }

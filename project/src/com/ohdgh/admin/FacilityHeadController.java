@@ -33,22 +33,28 @@ public class FacilityHeadController extends HttpServlet {
 		try {
 			FacilityHeadDao dao = new FacilityHeadDao();
 			String empNo = request.getParameter("empno");
-			if(dao.getRowByEmpNo(empNo) == null) {
-				
-				//add FacilityHead
-				FacilityHead facilityHead = new FacilityHead();
-				facilityHead.setEmpNo(empNo);
-				facilityHead.setName(request.getParameter("name"));
-				facilityHead.setDepartment(request.getParameter("department"));
-				facilityHead.setSpecialization(request.getParameter("specialization"));
-				facilityHead.setFacility(request.getParameter("facility"));
-				
-				dao.addRow(facilityHead);
-				
-				request.setAttribute("message", "Facility Head added Successfully.");
+			String facility = request.getParameter("facility");
+			if(dao.distinctFacility(facility)) {
+				if(dao.getRowByEmpNo(empNo) == null) {
+					
+					//add FacilityHead
+					FacilityHead facilityHead = new FacilityHead();
+					facilityHead.setEmpNo(empNo);
+					facilityHead.setName(request.getParameter("name"));
+					facilityHead.setDepartment(request.getParameter("department"));
+					facilityHead.setSpecialization(request.getParameter("specialization"));
+					facilityHead.setFacility(facility);
+					
+					dao.addRow(facilityHead);
+					
+					request.setAttribute("message", "Facility Head added Successfully.");
+				}
+				else {
+					request.setAttribute("message", "Facility Head already exist");
+				}
 			}
-			else {
-				request.setAttribute("message", "Facility Head already exist");
+			else {	
+				request.setAttribute("message", "Facility already exist for other Facility Head.");
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
