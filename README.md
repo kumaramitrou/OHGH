@@ -12,3 +12,20 @@ Few Softwares and Tools which you need are
   * JRE. (Java Runtime Environment)
   * Eclipse. (Integrated Development Environment)
   * Apache Tomcat Server. (Server)
+  
+__Note:__ ***Please refer [SetupInstructions.txt](SetupInstructions.txt) file for setting up environment in your local system.***
+
+## Future Scope
+  * Can view uploaded documents in portal.
+  * Notified over email or message for any updates(once in a day, if any).
+  * Use of Encryption for password.
+  * UI - Use of sticky navbar.
+  * Use Footer for copyright.
+  * Caching for performance improvement.
+
+## Improvements
+  * Database should be normalized.
+  * Code could be made more generic.
+  * Website could have been more responsive.
+  * Could have used Collated Database.
+  * Exception Logging.
