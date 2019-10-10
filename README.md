@@ -28,3 +28,4 @@ __Note:__ ***Please refer [SetupInstructions.txt](SetupInstructions.txt) file fo
   * Code could be made more generic.
   * Website could have been more responsive.
   * Could have used Collated Database.
+  * Exception Logging.
