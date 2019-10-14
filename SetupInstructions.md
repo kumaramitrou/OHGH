@@ -2,7 +2,7 @@
 
   ## Below is the list of Softwares and tools you need to run this website locally.
 
-   [Step 1. :unchecked] Use Ninite and install JRE and Eclipse
+   * [ ] Step 1. Use Ninite and install JRE and Eclipse
 
    [Step 2. :unchecked] Download Apache tomcat v8.5
   
