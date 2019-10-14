@@ -2,13 +2,13 @@
 
   ## Below is the list of Softwares and tools you need to run this website locally.
 
-  -[x] Use Ninite and install JRE and Eclipse
+   [Step 1. :unchecked] Use Ninite and install JRE and Eclipse
 
-  -[x] Download Apache tomcat v8.5
+   [Step 2. :unchecked] Download Apache tomcat v8.5
   
-  -[x] Download SSMS
+   [Step 3. :unchecked] Download SSMS
   
-  -[x] Install JEE perspective if not available with your Eclipse.
+   [Step 4. :unchecked] Install JEE perspective if not available with your Eclipse.
   
   
   
