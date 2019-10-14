@@ -170,4 +170,44 @@ public class FacilityHeadDao {
 		}
 		return isDistinct;
 	}
+	
+	public List<String> listFacilities(){
+		String query = "Select distinct [Facility] from [dbo].[FacilityHead]";
+		List<String> facilities = new ArrayList<String>();
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+			while (resultSet.next())
+            {
+				facilities.add(resultSet.getString("Facility"));
+            }
+            connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return facilities;
+	}
+
+	public String getRowByFacility(String facility) {
+		String query = "select u.[UserName] from [dbo].[User] as u join [dbo].[FacilityHead] as f on u.UID = f.EmpNo where f.Facility = ?";
+		String userName = "";
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, facility);
+			ResultSet resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				userName = resultSet.getString("UserName");
+			}
+            connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return userName;
+	}
 }
