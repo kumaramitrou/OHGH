@@ -23,12 +23,18 @@ public class RequestController extends HttpServlet {
 		String value = request.getParameter("id");
 		HttpSession session = request.getSession();
 		EventsDao eventsDao = new EventsDao();
+		boolean from = true;
 
+		if(session.getAttribute("landingpage")!=null)
+		{
+			from = ((String)session.getAttribute("landingpage")).equalsIgnoreCase("WelcomeStudent.jsp");
+		}
+		
 		if(value.equalsIgnoreCase("viewall")) {
-			request.setAttribute("requests", eventsDao.listAllRequests((String)session.getAttribute("username")));
+			request.setAttribute("requests", eventsDao.listAllRequests((String)session.getAttribute("username"), from));
 		}
 		if(value.equalsIgnoreCase("viewopen")) {
-			request.setAttribute("requests", eventsDao.listOpenRequests((String)session.getAttribute("username")));
+			request.setAttribute("requests", eventsDao.listOpenRequests((String)session.getAttribute("username"), from));
 		}
 		System.out.println(value);
 		RequestDispatcher rd = request.getRequestDispatcher("RequestListView.jsp");

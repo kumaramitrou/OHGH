@@ -62,6 +62,12 @@ public class Event {
 	public void setFacility(String facility) {
 		this.facility = facility;
 	}
+	public String getDesign() {
+		return design;
+	}
+	public void setDesign(String design) {
+		this.design = design;
+	}
 	String message;
 	String documentUrl;
 	String eventType;
@@ -71,4 +77,5 @@ public class Event {
 	String to;
 	String from;
 	String facility;
+	String design;
 }
