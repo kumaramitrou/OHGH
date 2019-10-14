@@ -8,21 +8,20 @@ By using this website users will be able to raise request to avail facility from
   This Website is developed using JSP and Servlet and tried following MVC(Model View Controller) pattern. Java is used as basic language for development, and is hosted in Apache Tomcat. Bootstrap is majorly used to design header and Navigation bar. Azure SQL Database is used for storing Relational Data, hence Azure subscription is also needed to create SQL Server (can use your own local or hosted SQL Server). Please Note that complex queries has been avoided in most of the places, and Tables are not normalized (which should be). There is a major code repetitions which could have been avoided. Basic HTML validations are used in forms.
 
 ## Technologies
-  1. Languages.
-    a. Java(primary).
-    b. Javascript.
-    c. HTML
-    d. Azure SQL.
+
+- Languages.
+  * Java(Primary)
+  * JavaScript
+  * HTML
+  * SQL
   
-  2. Server : Apache Tomcat v8.5.
-  
-  3. Styling
-    a. Basic CSS.
-    b. Bootstrap
-  
-  4. Tools
-    a. Eclipse.
-    b. SSMS(SQL Server Management Studio)
+- Server : Apache Tomcat v8.5.
+- Styling
+  * Basic CSS
+  * Bootstrap
+- Tools
+  * Eclipse.
+  * SSMS(SQL Server Management Studio).
     
 ## Documents
   There are few documents in this [repository](https://github.com/kumaramitrou/OHGH) which might be useful for setting up or using this website. 
