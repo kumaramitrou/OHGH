@@ -4,11 +4,11 @@
 
    * [ ] **Step 1.** Use Ninite and install JRE and Eclipse
 
-   * [ ] **Step 2.** Download Apache tomcat v8.5
+   * [ ] **Step 2.** Download and Setup Apache tomcat v8.5
   
-   * [ ] **Step 3.** Download SSMS
+   * [ ] **Step 3.** Download SSMS and execute initial script.
   
-   * [ ] **Step 4.** Install JEE perspective if not available with your Eclipse.
+   * [ ] **Step 4.** Install JEE perspective if not available with your Eclipse.(optional)
   
   
   
