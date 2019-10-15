@@ -1,11 +1,17 @@
 package com.ohdgh.request;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.ohdgh.db.EventsDao;
+import com.ohdgh.model.Event;
 
 @WebServlet("/Reply")
 public class ReplyController extends HttpServlet {
@@ -13,12 +19,40 @@ public class ReplyController extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String trackingId = request.getParameter("trackingid");
+		System.out.println("Tracking Id is : "+ trackingId);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String trackingId = request.getParameter("trackingid");
+		System.out.println("Tracking Id is : "+ trackingId);
+		
+		HttpSession session = request.getSession();
+		EventsDao eventDao = new EventsDao();
+		Event reply = new Event();
+		Event firstRequest = eventDao.getFirstRequest(trackingId);
+		
+		String sub = request.getParameter("subject");
+		String message = request.getParameter("content");
+		String username = (String)session.getAttribute("username");
+		System.out.println("Subject : "+sub+" Content : "+ message);
+
+		reply.setTrackingId(trackingId);
+		reply.setMessage(message);
+		reply.setSubject(sub);
+		reply.setFrom(username);
+		reply.setFacility(firstRequest.getFacility());
+		reply.setEventType("Reply");
+		
+		if (firstRequest.getFrom().equalsIgnoreCase(username)) {
+			reply.setTo(firstRequest.getTo());
+		}
+		else {
+			reply.setTo(firstRequest.getFrom());
+		}
+		eventDao.addReply(reply);
+		RequestDispatcher rd = request.getRequestDispatcher("Show?trackingid="+trackingId);
+		rd.forward(request,response);
 	}
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

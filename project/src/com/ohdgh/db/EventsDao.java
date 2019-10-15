@@ -167,4 +167,87 @@ public class EventsDao {
 		}
 		return isExist;
 	}
+	
+	public boolean addReply(Event reply) {
+		boolean isSuccess = false;
+		String query = "Insert into [dbo].[Events] ([Subject],[Message],[SerialNo],[Facility],[EventType],[TrackingId],[From],[To]) values (?, ?, ?, ?, ?, ?, ?, ?)";
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			
+			stmt.setString(1, reply.getSubject());
+			stmt.setString(2, reply.getMessage());
+			stmt.setInt(3, getSerialNo(reply.getTrackingId()));
+			stmt.setString(4, reply.getFacility());
+			stmt.setString(5, reply.getEventType());
+			stmt.setString(6, reply.getTrackingId());
+			stmt.setString(7, reply.getFrom());
+			stmt.setString(8, reply.getTo());
+			
+			int rowsUpdated = stmt.executeUpdate();
+			System.out.println("Reply added Successfully..");
+			
+			if(rowsUpdated>0)
+				isSuccess = true;
+			
+            connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return isSuccess;
+	}
+	
+	public Event getFirstRequest(String trackingId) {
+		Event event = new Event();
+		String query = "select * from [dbo].[Events] where [TrackingId] = ? and [SerialNo] = 1";
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setString(1, trackingId);
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()) {
+				event.setId(rs.getLong("Id"));
+				event.setDocumentUrl(rs.getString("DocumentUrl"));
+				event.setEventType(rs.getString("EventType"));
+				event.setFacility(rs.getString("Facility"));
+				event.setFrom(rs.getString("From"));
+				event.setTo(rs.getString("To"));
+				event.setMessage(rs.getString("Message"));
+				event.setSubject(rs.getString("Subject"));
+				event.setTrackingId(rs.getString("TrackingId"));
+				event.setSerialNo(rs.getInt("SerialNo"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return event;
+	}
+	
+	/**
+	 * @param trackingId
+	 * @return
+	 */
+	private int getSerialNo(String trackingId) {
+		String query = "select Max([SerialNo])+1 as [Serial] from [dbo].[Events] where [TrackingId] = ?";
+		int serialNo = 0;
+		try {
+			System.out.println("SerialNo : "+serialNo);
+			Class.forName(DatabaseCredentials.driver);
+			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setString(1, trackingId);
+			ResultSet rs = stmt.executeQuery();
+			serialNo = rs.next() ? rs.getInt("Serial") : 1;
+			System.out.println("SerialNo : "+serialNo);
+			con.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return serialNo;
+	}
 }

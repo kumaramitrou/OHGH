@@ -34,6 +34,7 @@ public class ShowController extends HttpServlet {
 			request.setAttribute("solutionVisibility", "hidden");
 		}
 
+		request.setAttribute("trackingid", trackingId);
 		request.setAttribute("requesthistory", requestHistory);//((String)session.getAttribute("username"), from));
 		RequestDispatcher rd = request.getRequestDispatcher("RequestView.jsp");
 		rd.forward(request, response);

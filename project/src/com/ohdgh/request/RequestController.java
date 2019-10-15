@@ -36,7 +36,6 @@ public class RequestController extends HttpServlet {
 		if(value.equalsIgnoreCase("viewopen")) {
 			request.setAttribute("requests", eventsDao.listOpenRequests((String)session.getAttribute("username"), from));
 		}
-		System.out.println(value);
 		RequestDispatcher rd = request.getRequestDispatcher("RequestListView.jsp");
 		rd.forward(request, response);
 	}

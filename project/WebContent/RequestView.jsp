@@ -53,7 +53,7 @@
       </div>
   	</div>
   </c:forEach>
-  <form action="Reply?trackingid=${rq.getTrackingId()}" method="get">
+  <form action="Reply?trackingid=${trackingid}" method="post">
   <div class="panel panel-info" <%= request.getAttribute("divVisibility") %>>
   	<div class="panel-heading">
     	<label for="subject">Subject:</label>
@@ -65,16 +65,15 @@
     	<textarea class="form-control" rows="5" id="content" placeholder="Content" name="content" required></textarea>
   	</div>
   	<button type="submit" class="btn btn-success" value ="Reply" style="float: right; margin: 10px;"><span class="glyphicon glyphicon-pencil"></span> Reply</button>
-  	<button type="submit" class="btn btn-success" value ="Solution" style="float: right; margin: 10px;" formnovalidate="formnovalidate"><span class="glyphicon glyphicon-ok"></span> <a style="color: inherit; text-decoration: none;" href="Solution?trackingid=4d8b74f1-7cfd-4034-a493-8c5dad4f8187"> Mark as Solution</a></button>
+  	<button type="submit" class="btn btn-success" value ="Solution" style="float: right; margin: 10px;" formnovalidate="formnovalidate" onclick="form.action='Solution?trackingid=${trackingid}';" <%= ((String)session.getAttribute("landingpage")).equalsIgnoreCase("WelcomeFacilityHead.jsp") ? "disabled" : ""%>><span class="glyphicon glyphicon-ok"></span> Mark as a Solution</button>
   </div>
 </form>
-  <div <%= request.getAttribute("solutionVisibility") %>> <h3 style="color: green;"> Marked as Solution </h3></div>
+  <div <%= request.getAttribute("solutionVisibility") %>> <h3 style="color: green;"> Mark as Resolved </h3></div>
 <h3>${message}</h3>
       <%
       	request.removeAttribute("message");
       %>
 </div>
-
 
 </body>
 
