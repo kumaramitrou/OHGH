@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,10 @@
   <link rel="icon" href="./IMAGES/homeImage.jpg">
 <title>Online Help Desk.</title>
 </head>
+
+
 <body>
+
 <%
 	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 	//for Http 1.0
@@ -23,31 +27,13 @@
 	}
 %>
 
-
-
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="<%= (String)session.getAttribute("landingpage") %>">Help Desk and Grievance Handling.</a>
+      <a class="navbar-brand" href="index.jsp">Help Desk and Grievance Handling.</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="<%= (String)session.getAttribute("landingpage") %>">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Requests<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="Request?id=viewall">View All</a></li>
-          <li><a href="Request?id=viewopen">View Open</a></li>
-          <li><a href="RequestNew.jsp">Raise New</a></li>
-        </ul>
-      </li>      
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Grievance<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="Grievance">View All</a></li>
-          <li><a href="GrievanceNew.jsp">Raise New</a></li>
-        </ul>
-      </li>
-      <li><a href="Update">Updates<span class="badge" id="update">${update}</span></a></li>
-      <li><a href="Notification">Notifications<span class="badge" id="notif">${notif}</span></a></li>
-      <li><a href="ChangePassword.jsp">Change Password</a></li>
+      <li><a href="index.jsp">Home</a></li>
       <li><a href="AboutUs.jsp">About Us </a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -57,7 +43,34 @@
   </div>
 </nav>
 
+<div class="container">
+  <h2><strong>Grievances.</strong></h2>
+  <c:forEach items="${grievances}" var = "rq" >
+   <form  id = "${rq.getTrackingId()}" action="Solution?trackingid=${rq.getTrackingId()}" method="get">
+  	<div class="panel panel-success">
+      <div class="panel-heading"><strong>${rq.getSubject()} - ( ${rq.getId()} )</strong></div>
+      <div class="panel-body">
+      ${rq.getMessage()}
 
-<h1>Student</h1>
+      <button id="${rq.getTrackingId()}" type="submit" class="btn btn-success" value ="Solution" style="float: right; margin: 10px;"  <%= ((String)session.getAttribute("landingpage")).equalsIgnoreCase("WelcomeFacilityHead.jsp") ? "" : "disabled"%>><span class="glyphicon glyphicon-ok"></span> Mark as a Resolved</button>
+      </div>
+  	</div>
+  </form>
+  </c:forEach>
+<h3>${message}</h3>
+      <%
+      	request.removeAttribute("message");
+      %>
+</div>
+
+<script>
+	function getRequest(trackingId){
+		alert(trackingId);
+			fetch("Show" + "?trackingid=" + trackingId, {
+				method: 'get'
+			});
+	}
+</script>
 </body>
+
 </html>

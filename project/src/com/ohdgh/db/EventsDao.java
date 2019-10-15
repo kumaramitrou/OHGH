@@ -40,6 +40,37 @@ public class EventsDao {
 		}
 		return isSuccess;
 	}
+	
+	public boolean addGrievance(Event event) {
+		boolean isSuccess = false;
+		String query = "Insert into [dbo].[Events] ([Subject],[Message],[SerialNo],[Facility],[EventType],[TrackingId],[From],[To]) values (?, ?, ?, ?, ?, ?, ?, ?)";
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection connection = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = connection.prepareStatement(query);
+			
+			stmt.setString(1, event.getSubject());
+			stmt.setString(2, event.getMessage());
+			stmt.setInt(3, 1);
+			stmt.setString(4, event.getFacility());
+			stmt.setString(5, event.getEventType());
+			stmt.setString(6, event.getTrackingId());
+			stmt.setString(7, event.getFrom());
+			stmt.setString(8, event.getTo());
+			
+			int rowsUpdated = stmt.executeUpdate();
+			System.out.println("Added Successfully..");
+			
+			if(rowsUpdated>0)
+				isSuccess = true;
+			
+            connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return isSuccess;
+	}
 
 	public List<Event> listAllRequests(String userName, boolean from){
 		String fromQuery = "select * from [dbo].[Events] where [SerialNo] = 1 and [EventType] = ? and [From] = ?";
@@ -51,6 +82,40 @@ public class EventsDao {
 			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
 			PreparedStatement stmt = con.prepareStatement(query);
 			stmt.setString(1, "Request");
+			stmt.setString(2, userName);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Event req = new Event();
+				req.setId(rs.getLong("Id"));
+				req.setDocumentUrl(rs.getString("DocumentUrl"));
+				req.setEventType(rs.getString("EventType"));
+				req.setFacility(rs.getString("Facility"));
+				req.setFrom(userName);
+				req.setMessage(rs.getString("Message"));
+				req.setSubject(rs.getString("Subject"));
+				req.setTrackingId(rs.getString("TrackingId"));
+				allRequests.add(req);
+			}
+			
+			con.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return allRequests;
+	}
+	
+	public List<Event> listAllGrievances(String userName, boolean from){
+		String fromQuery = "select * from [dbo].[Events] where [SerialNo] = 1 and [EventType] = ? and [From] = ?";
+		String toQuery = "select * from [dbo].[Events] where [SerialNo] = 1 and [EventType] = ? and [To] = ?";
+		String query = from ? fromQuery : toQuery ;
+		List<Event> allRequests = new ArrayList<Event>();
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setString(1, "Grievance");
 			stmt.setString(2, userName);
 			ResultSet rs = stmt.executeQuery();
 			
@@ -249,5 +314,27 @@ public class EventsDao {
 			e.printStackTrace();
 		}
 		return serialNo;
+	}
+	
+	public boolean markResolved(String trackingId) {
+		String query = "Update [dbo].[Events]\r\n" + 
+				"Set [EventType] = 'Solution'\r\n" + 
+				"where [TrackingId] = ? and \r\n" + 
+				"[SerialNo] = (select Max([SerialNo]) from [dbo].[Events] where [TrackingId] = ?)";
+		boolean isSuccess = false;
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setString(1, trackingId);
+			stmt.setString(2, trackingId);
+			int rs = stmt.executeUpdate();
+			isSuccess = rs>0;
+			con.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return isSuccess;
 	}
 }

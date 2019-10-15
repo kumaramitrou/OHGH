@@ -68,7 +68,7 @@
   	<button type="submit" class="btn btn-success" value ="Solution" style="float: right; margin: 10px;" formnovalidate="formnovalidate" onclick="form.action='Solution?trackingid=${trackingid}';" <%= ((String)session.getAttribute("landingpage")).equalsIgnoreCase("WelcomeFacilityHead.jsp") ? "disabled" : ""%>><span class="glyphicon glyphicon-ok"></span> Mark as a Solution</button>
   </div>
 </form>
-  <div <%= request.getAttribute("solutionVisibility") %>> <h3 style="color: green;"> Mark as Resolved </h3></div>
+  <div <%= request.getAttribute("solutionVisibility") %>> <h3 style="color: green;"> Resolved </h3></div>
 <h3>${message}</h3>
       <%
       	request.removeAttribute("message");

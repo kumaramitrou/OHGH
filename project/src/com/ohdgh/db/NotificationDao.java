@@ -71,4 +71,8 @@ public class NotificationDao {
 		}
 		return true;
 	}
+	
+	public boolean addNotification(Notification notification) {
+		return true;
+	}
 }
