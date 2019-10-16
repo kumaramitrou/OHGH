@@ -45,21 +45,36 @@
 
 <div class="container">
   <h2><strong>Request.</strong></h2>
-  <c:forEach items="${requests}" var = "rq" >
-  	<div class="panel panel-success">
-      <div class="panel-heading"><strong>${rq.getSubject()} - ( ${rq.getRequestId()} )</strong></div>
+  <c:forEach items="${requesthistory}" var = "rqh" >
+  	<div class="${rqh.getDesign()}" id="${rqh.getId()}">
+      <div class="panel-heading"><strong>${rqh.getSubject()} - ( ${rqh.getSerialNo()} )</strong></div>
       <div class="panel-body">
-      ${rq.getMessage()}
+      ${rqh.getMessage()}
       </div>
   	</div>
   </c:forEach>
-  <button type="submit" class="btn btn-success" value ="Solution" style="float: right; margin: 10px;"><span class="glyphicon glyphicon-ok"></span> Mark as Solution</button>
-  <button type="submit" class="btn btn-success" value ="Reply" style="float: right; margin: 10px;"><span class="glyphicon glyphicon-pencil"></span> Reply</button>
+  <form action="Reply?trackingid=${trackingid}" method="post">
+  <div class="panel panel-info" <%= request.getAttribute("divVisibility") %>>
+  	<div class="panel-heading">
+    	<label for="subject">Subject:</label>
+    	<input type="text" class="form-control" id="subject" aria-describedby="emailHelp" placeholder="subject" name="subject" required>
+  	</div>
+  				
+  	<div class="panel-body">
+    	<label for="content">Content:</label>
+    	<textarea class="form-control" rows="5" id="content" placeholder="Content" name="content" required></textarea>
+  	</div>
+  	<button type="submit" class="btn btn-success" value ="Reply" style="float: right; margin: 10px;"><span class="glyphicon glyphicon-pencil"></span> Reply</button>
+  	<button type="submit" class="btn btn-success" value ="Solution" style="float: right; margin: 10px;" formnovalidate="formnovalidate" onclick="form.action='Solution?trackingid=${trackingid}';" <%= ((String)session.getAttribute("landingpage")).equalsIgnoreCase("WelcomeFacilityHead.jsp") ? "disabled" : ""%>><span class="glyphicon glyphicon-ok"></span> Mark as a Solution</button>
+  </div>
+</form>
+  <div <%= request.getAttribute("solutionVisibility") %>> <h3 style="color: green;"> Resolved </h3></div>
 <h3>${message}</h3>
       <%
       	request.removeAttribute("message");
       %>
 </div>
+
 </body>
 
 </html>

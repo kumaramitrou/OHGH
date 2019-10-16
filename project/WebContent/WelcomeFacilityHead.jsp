@@ -36,15 +36,11 @@
       
 	<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Requests<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="RequestView.jsp">View All</a></li>
-		  <li><a href="#">View Open</a></li>
+          <li><a href="Request?id=viewall">View All</a></li>
+		  <li><a href="Request?id=viewopen">View Open</a></li>
         </ul>
       </li>      
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Grievance<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">View All</a></li>
-          <li><a href="#">View Open</a></li>
-        </ul>
+      <li><a href="Grievance">Grievances</a>
       </li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Updates<span class="caret"></span></a>
         <ul class="dropdown-menu">

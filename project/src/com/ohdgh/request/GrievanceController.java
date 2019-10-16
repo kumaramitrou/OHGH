@@ -17,12 +17,12 @@ import com.ohdgh.db.NotificationDao;
 import com.ohdgh.model.Event;
 import com.ohdgh.model.Notification;
 
-@WebServlet("/Request")
-public class RequestController extends HttpServlet {
+@WebServlet("/Grievance")
+public class GrievanceController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String value = request.getParameter("id");
+		System.out.println("Called Grievance get");
 		HttpSession session = request.getSession();
 		EventsDao eventsDao = new EventsDao();
 		boolean from = true;
@@ -32,52 +32,44 @@ public class RequestController extends HttpServlet {
 			from = ((String)session.getAttribute("landingpage")).equalsIgnoreCase("WelcomeStudent.jsp");
 		}
 		
-		if(value.equalsIgnoreCase("viewall")) {
-			request.setAttribute("requests", eventsDao.listAllRequests((String)session.getAttribute("username"), from));
-		}
-		if(value.equalsIgnoreCase("viewopen")) {
-			request.setAttribute("requests", eventsDao.listOpenRequests((String)session.getAttribute("username"), from));
-		}
-		RequestDispatcher rd = request.getRequestDispatcher("RequestListView.jsp");
+		request.setAttribute("grievances", eventsDao.listAllGrievances((String)session.getAttribute("username"), from));
+		// Can add mark as solution if needed.
+		// <button id="${rq.getTrackingId()}" onclick="javascript:markResolved(this.id)" type="submit" class="btn btn-success" value ="Solution" style="float: right; margin: 10px;"  <%= ((String)session.getAttribute("landingpage")).equalsIgnoreCase("WelcomeFacilityHead.jsp") ? "" : "disabled"%> style="display: none;"><span class="glyphicon glyphicon-ok"></span> Mark as a Resolved</button>
+		RequestDispatcher rd = request.getRequestDispatcher("GrievanceListView.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Inside Request Post.");
+		System.out.println("Called Grievance Post");
 		HttpSession session = request.getSession();
 		Event event = new Event();
 		EventsDao dao = new EventsDao();
+		NotificationDao notificationDao = new NotificationDao();
 		FacilityHeadDao facilityHeadDao = new FacilityHeadDao();
-		UUID uuid = UUID.randomUUID();;
-		event.setSubject(request.getParameter("subject"));
+		UUID uuid = UUID.randomUUID();
+		String subject = request.getParameter("subject");
+		event.setSubject(subject);
 		event.setMessage(request.getParameter("content"));
 		event.setFacility(request.getParameter("facility"));
 		event.setFrom((String)session.getAttribute("username"));
-		event.setEventType("Request");
+		event.setEventType("Grievance");
 		event.setSerialNo(1);
-		event.setTo(facilityHeadDao.getRowByFacility(request.getParameter("facility")));
+		String to = facilityHeadDao.getRowByFacility(request.getParameter("facility"));
+		event.setTo(to);
 		event.setTrackingId(uuid.toString());
-		dao.addRequest(event);
+		dao.addGrievance(event);
 		
-		// Add Notification
-		NotificationDao notificationDao = new NotificationDao();
+		request.setAttribute("message", "Complaint added successfully.");
+		
+		//Add Notification
 		Notification notification = new Notification();
 		notification.setRequestId(uuid.toString());
-		notification.setSubject("New Request Raised.");
-		notification.setMessage(event.getSubject());
-		notificationDao.addNotification(notification, event.getTo());
+		notification.setSubject("New Grievance Raised");
+		notification.setMessage(subject);
+		notificationDao.addNotification(notification, to);
 		
-		request.setAttribute("message", "Request added successfully.");
-		RequestDispatcher rd = request.getRequestDispatcher("RequestNew.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("GrievanceNew.jsp");
 		rd.forward(request, response);
-	}
-
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

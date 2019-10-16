@@ -172,7 +172,7 @@ public class FacilityHeadDao {
 	}
 	
 	public List<String> listFacilities(){
-		String query = "Select distinct [Facility] from [dbo].[FacilityHead]";
+		String query = "Select Distinct [Facility] from [dbo].[FacilityHead] fh join [dbo].[User] us on fh.[EmpNo] = us.[UID]";
 		List<String> facilities = new ArrayList<String>();
 		try {
 			Class.forName(DatabaseCredentials.driver);

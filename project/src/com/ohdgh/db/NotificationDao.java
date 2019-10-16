@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ohdgh.model.Event;
 import com.ohdgh.model.Notification;
 
 public class NotificationDao {
@@ -70,5 +71,31 @@ public class NotificationDao {
 			e.printStackTrace();
 		}
 		return true;
+	}
+	
+	public boolean addNotification(Notification notification, String userName) {
+		boolean isSuccess = false;
+		String query = "INSERT INTO [dbo].[Notification] ([UserName], [Message], [RequestId], [Subject], [IsViewed]) VALUES (?, ?, ?, ?, 0)";
+		try {
+			Class.forName(DatabaseCredentials.driver);
+			Connection con = DriverManager.getConnection(DatabaseCredentials.url);
+			PreparedStatement stmt = con.prepareStatement(query);
+			
+			EventsDao eventDao = new EventsDao();
+			Event request = eventDao.getFirstRequest(notification.getRequestId());
+			
+			stmt.setString(1, userName);
+			stmt.setString(2, notification.getMessage());
+			stmt.setLong(3, request.getId());
+			stmt.setString(4, notification.getSubject());
+			
+			isSuccess = stmt.executeUpdate() > 0;
+			
+			con.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return isSuccess;
 	}
 }
