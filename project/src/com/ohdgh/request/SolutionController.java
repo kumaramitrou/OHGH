@@ -16,7 +16,7 @@ public class SolutionController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.print("Inside Solution, Tracking Id is : "+ request.getParameter("trackingid"));
+		System.out.println("Inside Solution, Tracking Id is : "+ request.getParameter("trackingid"));
 		String trackingId = request.getParameter("trackingid");
 		
 		EventsDao eventsDao = new EventsDao();
@@ -35,6 +35,7 @@ public class SolutionController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("Inside Solution Post.");
 		doGet(request, response);
 	}
 

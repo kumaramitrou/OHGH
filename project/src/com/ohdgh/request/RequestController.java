@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import com.ohdgh.db.EventsDao;
 import com.ohdgh.db.FacilityHeadDao;
+import com.ohdgh.db.NotificationDao;
 import com.ohdgh.model.Event;
+import com.ohdgh.model.Notification;
 
 @WebServlet("/Request")
 public class RequestController extends HttpServlet {
@@ -56,6 +58,15 @@ public class RequestController extends HttpServlet {
 		event.setTo(facilityHeadDao.getRowByFacility(request.getParameter("facility")));
 		event.setTrackingId(uuid.toString());
 		dao.addRequest(event);
+		
+		// Add Notification
+		NotificationDao notificationDao = new NotificationDao();
+		Notification notification = new Notification();
+		notification.setRequestId(uuid.toString());
+		notification.setSubject("New Request Raised.");
+		notification.setMessage(event.getSubject());
+		notificationDao.addNotification(notification, event.getTo());
+		
 		request.setAttribute("message", "Request added successfully.");
 		RequestDispatcher rd = request.getRequestDispatcher("RequestNew.jsp");
 		rd.forward(request, response);

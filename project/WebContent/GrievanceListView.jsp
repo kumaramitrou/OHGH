@@ -46,16 +46,16 @@
 <div class="container">
   <h2><strong>Grievances.</strong></h2>
   <c:forEach items="${grievances}" var = "rq" >
-   <form  id = "${rq.getTrackingId()}" action="Solution?trackingid=${rq.getTrackingId()}" method="get">
+
   	<div class="panel panel-success">
       <div class="panel-heading"><strong>${rq.getSubject()} - ( ${rq.getId()} )</strong></div>
       <div class="panel-body">
       ${rq.getMessage()}
 
-      <button id="${rq.getTrackingId()}" type="submit" class="btn btn-success" value ="Solution" style="float: right; margin: 10px;"  <%= ((String)session.getAttribute("landingpage")).equalsIgnoreCase("WelcomeFacilityHead.jsp") ? "" : "disabled"%>><span class="glyphicon glyphicon-ok"></span> Mark as a Resolved</button>
+      
       </div>
   	</div>
-  </form>
+
   </c:forEach>
 <h3>${message}</h3>
       <%
@@ -64,10 +64,10 @@
 </div>
 
 <script>
-	function getRequest(trackingId){
+	function markResolved(trackingId){
 		alert(trackingId);
-			fetch("Show" + "?trackingid=" + trackingId, {
-				method: 'get'
+			fetch("Solution" + "?trackingid=" + trackingId, {
+				method: 'post'
 			});
 	}
 </script>

@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ohdgh.db.EventsDao;
+import com.ohdgh.db.NotificationDao;
 import com.ohdgh.model.Event;
+import com.ohdgh.model.Notification;
 
 @WebServlet("/Reply")
 public class ReplyController extends HttpServlet {
@@ -51,6 +53,15 @@ public class ReplyController extends HttpServlet {
 			reply.setTo(firstRequest.getFrom());
 		}
 		eventDao.addReply(reply);
+		
+		// Add Notification
+		NotificationDao notificationDao = new NotificationDao();
+		Notification notification = new Notification();
+		notification.setRequestId(trackingId);
+		notification.setSubject("Got a Reply.");
+		notification.setMessage(sub);
+		notificationDao.addNotification(notification, reply.getTo());
+		
 		RequestDispatcher rd = request.getRequestDispatcher("Show?trackingid="+trackingId);
 		rd.forward(request,response);
 	}
