@@ -59,3 +59,7 @@ __Note:__ ***Please refer [SetupInstructions.md](SetupInstructions.md) file for 
   * Exception Logging.
   * Unit Test Cases.
   * Use of AppSettings file.
+  
+## Reference
+  * [Servlet & JSP Tutorial | Full Course](https://www.youtube.com/watch?v=OuBUUkQfBYM)
+  * [W3Schools](https://www.w3schools.com/)
