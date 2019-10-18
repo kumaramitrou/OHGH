@@ -35,7 +35,7 @@
 
 ### **Step 2.** Download Apache tomcat v8.5.
 
-  To install Apache Tomcat v8.5, open your browser and navigate to ![http://tomcat.apache.org/](http://tomcat.apache.org/)
+  To install Apache Tomcat v8.5, open your browser and navigate to [tomcat](http://tomcat.apache.org/)
   
   You will be redirected to page shown below
   
@@ -45,7 +45,7 @@
   
   ![Tomcat doc and source Code](documentImages/downloaddocAndzip.png)
   
-  Download both ![Binary Distribution](http://apachemirror.wuchna.com/tomcat/tomcat-8/v8.5.47/bin/apache-tomcat-8.5.47-windows-x64.zip) and ![Source Code Distribution](http://apachemirror.wuchna.com/tomcat/tomcat-8/v8.5.47/bin/embed/apache-tomcat-8.5.47-embed.zip)
+  Download both [Binary Distribution](http://apachemirror.wuchna.com/tomcat/tomcat-8/v8.5.47/bin/apache-tomcat-8.5.47-windows-x64.zip) and [Source Code Distribution](http://apachemirror.wuchna.com/tomcat/tomcat-8/v8.5.47/bin/embed/apache-tomcat-8.5.47-embed.zip)
   
   Once it is downloaded, extract downloaded zip folder as shown below
   
@@ -57,13 +57,13 @@
   
 ### **Step 3.** Download SSMS.
 
-  To View Database and data in Tables you need an interface. SSMS(SQL Server Management Studio) is a tool where you can query to your database. Since we are using Azure SQL here we will be skipping the installation of SQL Server locally and this also means that to access the database (even to run this website locally) you need an **internet Connection**. If you don't want to use Azure SQL then please install SQL Server into your local machine and create all required Tables into it, update credentials in ![DatabaseCredentials.java](OHGH/project/src/com/ohdgh/db/DatabaseCredentials.java) file of the project.
+  To View Database and data in Tables you need an interface. SSMS(SQL Server Management Studio) is a tool where you can query to your database. Since we are using Azure SQL here we will be skipping the installation of SQL Server locally and this also means that to access the database (even to run this website locally) you need an **internet Connection**. If you don't want to use Azure SQL then please install SQL Server into your local machine and create all required Tables into it, update credentials in [DatabaseCredentials.java](OHGH/project/src/com/ohdgh/db/DatabaseCredentials.java) file of the project.
   
   To install SSMS, open your browser and navigate to "https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15" url
   
   ![SSMS Download](documentImages/ssmsDownload.png)
   
-  Click on the ![link](https://aka.ms/ssmsfullsetup) as shown above
+  Click on the [link](https://aka.ms/ssmsfullsetup) as shown above
   
   Once it is downloaded please double click to run the exe file and start the installation
   
@@ -81,7 +81,7 @@
   
   For that first open SSMS.
   
-  Windows -> Type SSMS -> Enter <kbd>Enter</kbd>
+  Windows -> Type SSMS -> <kbd>Enter</kbd>
   
   ![installation started](documentImages/openssms001.png)
   
