@@ -172,3 +172,24 @@ To open it in eclipse first select Jee Perspective by clicking on small button b
 
 and select Java EE.
 
+Next step is to open project folder.
+
+![project folder](documentImages/openprojectfolder.png)
+
+Select the downloaded and extracted folder where project resides.
+
+![select folder](documentImages/selectfolder.png)
+
+Project folder will be shown on left hand side.
+Right click on that and select **1 Run on server**
+
+![run app](documentImages/runproject.png)
+
+Your Website will be working in eclipse's internal browser.
+
+
+
+
+
+
+
