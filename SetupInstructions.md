@@ -41,7 +41,7 @@
   
   ![Tomcat Url](documentImages/tomcatDownload.png)
   
-  Click ![download](https://tomcat.apache.org/download-80.cgi) button under **Tomcat 8.5.47 Released**
+  Click [download](https://tomcat.apache.org/download-80.cgi) button under **Tomcat 8.5.47 Released**
   
   ![Tomcat doc and source Code](documentImages/downloaddocAndzip.png)
   
@@ -81,7 +81,7 @@
   
   For that first open SSMS.
   
-  Windows -> Type SSMS -> <kbd>Enter</kbd>
+  <kbd>Window</kbd> -> Type SSMS -> <kbd>Enter</kbd>
   
   ![installation started](documentImages/openssms001.png)
   
@@ -99,8 +99,97 @@
   
   ![new query](documentImages/newQuery.png)
   
-### **Step 4.** Install JEE perspective if not available with your Eclipse.(optional)
-
-### **Step 5.** Link Apache Tomcat Server to Eclipse.
+  * [x] **Step 3.**
   
-Java 11 and Eclipse latest (2019-09)
+### **Step 4.** Install JEE perspective if not available with your Eclipse.(optional)
+  If you have worked on JEE (Java Enterprise Edition) previously then then Eclipse will be there with JEE Perspective.
+  Otherwise follow the below steps.
+  
+  First open Eclipse which is installed in step 1.
+  <kbd>Windows</kbd> -> Eclipse -> <kbd>Enter</kbd>
+  
+  ![Start Eclipse](documentImages/openEclipse.png)
+  
+  If you are starting Eclipse for the first time then it will ask you for a workspace location, please specify the workspace location here.
+  
+  ![Workspace location](documentImages/selectWorkSpace.png)
+  
+  Navigate to Help -> Install New Software.. on top of the tool bar.
+  
+  ![install new software](documentImages/JEEPerspective001.png)
+  
+  Select the following packages to install:
+
+       "Web, XML, Java EE and OSGI Enterprise Development". 
+       "Programming langauges -> Eclipse Java Development Tools"
+       
+  and click **Next**
+       
+  ![select packages](documentImages/softwareSelection.png)
+  
+  Enter Name as indigo and Location as http://download.eclipse.org/releases/indigo and click on **Add**
+  
+  ![add Jee Perspective](documentImages/JeeNameUrl.png)
+  
+  Now you are ready with Jee Perspective
+  
+  * [x] **Step 4.**
+  
+### **Step 5.** Link Apache Tomcat Server to Eclipse.
+  To run this website locally you will need a server, here we will use Apache Tomcat, it is free and you can integrate it with Eclipse easily.
+  
+  To link Tomcat to Eclipse you need to complete Step 1 and Step 2 first.
+  
+If you have completed the above steps then.
+Open Eclipse.
+and Navigate to Servers tab as shown below.
+
+![Servers Eclipse](documentImages/clickOnServers.png)
+
+and click on the highlighted place shown.
+on clicking a popup window will open
+Select Tomcat v8.5 Server and click **Next**.
+
+![select tomcat](documentImages/select8.5.png)
+
+Select the unzipped folder location of the tomcat server as shown in the below image.
+
+![unzipped location](documentImages/selectUnzippedLocation.png)
+
+Final step is to click on Finis and you will be ready with your development environment.
+
+![click finish](documentImages/clickFinish.png)
+
+* [x] **Step 5.**
+
+***Yay You are ready with your development environment.***
+  
+To execute the code on your local machine, Download the code from [repository](https://github.com/kumaramitrou/OHGH/tree/ohdgh) unzip it next open it in eclipse.
+
+To open it in eclipse first select Jee Perspective by clicking on small button below close **x** mark on top right hand corner, you will have a popup as shown below.
+
+![jee popup](documentImages/selectJEEperspective.png)
+
+and select Java EE.
+
+Next step is to open project folder.
+
+![project folder](documentImages/openprojectfolder.png)
+
+Select the downloaded and extracted folder where project resides.
+
+![select folder](documentImages/selectfolder.png)
+
+Project folder will be shown on left hand side.
+Right click on that and select **1 Run on server**
+
+![run app](documentImages/runproject.png)
+
+Your Website will be working in eclipse's internal browser.
+
+
+
+
+
+
+
