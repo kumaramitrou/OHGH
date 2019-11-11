@@ -81,7 +81,7 @@
   
   For that first open SSMS.
   
-  <kbd>Windows</kbd> -> Type SSMS -> <kbd>Enter</kbd>
+  <kbd>Window</kbd> -> Type SSMS -> <kbd>Enter</kbd>
   
   ![installation started](documentImages/openssms001.png)
   
